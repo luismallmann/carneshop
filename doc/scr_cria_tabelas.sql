@@ -62,15 +62,14 @@ CREATE TABLE pedido_produto (
 CREATE TABLE produto (
   codprod int4 NOT NULL 	, 
   desprod varchar(140), 
-  fabprod varchar(40) NOT NULL 		, 
   nomprod varchar(40) NOT NULL 		, 
   valprod numeric(10, 2) NOT NULL, 
   estprod int4 NOT NULL, 
+  imgprod varchar(80), 
   PRIMARY KEY (codprod));
 COMMENT ON TABLE produto IS 'informacoes do produto';
 COMMENT ON COLUMN produto.codprod IS 'codigo do produto';
 COMMENT ON COLUMN produto.desprod IS 'descricao do produto';
-COMMENT ON COLUMN produto.fabprod IS 'marca/fabricante do produto';
 COMMENT ON COLUMN produto.nomprod IS 'nome do produto';
 COMMENT ON COLUMN produto.valprod IS 'valor do produto(RS)      ';
 COMMENT ON COLUMN produto.estprod IS 'quantidade em estoque do produto';
@@ -98,8 +97,8 @@ COMMENT ON COLUMN venda.valvenda IS 'valor total da venda';
 COMMENT ON COLUMN venda.stsvenda IS 'status da venda';
 COMMENT ON COLUMN venda.datvenda IS 'data venda';
 COMMENT ON COLUMN venda.horvenda IS 'horario da venda';
-ALTER TABLE pedido_produto ADD CONSTRAINT FKpedido_pro330558 FOREIGN KEY (pedidocodped) REFERENCES pedido (codped);
 ALTER TABLE pedido_produto ADD CONSTRAINT FKpedido_pro231850 FOREIGN KEY (produtocodprod) REFERENCES produto (codprod);
+ALTER TABLE pedido_produto ADD CONSTRAINT FKpedido_pro330558 FOREIGN KEY (pedidocodped) REFERENCES pedido (codped);
 ALTER TABLE venda ADD CONSTRAINT FKvenda21377 FOREIGN KEY (pedidocodped) REFERENCES pedido (codped);
 ALTER TABLE pedido ADD CONSTRAINT FKpedido77747 FOREIGN KEY (clientecpfclnt) REFERENCES cliente (cpfclnt);
 ALTER TABLE telefone_cliente ADD CONSTRAINT FKtelefone_c632501 FOREIGN KEY (clientecpfclnt) REFERENCES cliente (cpfclnt);
