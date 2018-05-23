@@ -1,6 +1,6 @@
 <?php
 
-// require 'dao/usuariodao.php';
+require 'dao/clientedao.php';
 session_start();
 
 if (isset($_SESSION) && isset($_SESSION["login"]))
@@ -16,10 +16,10 @@ if (isset($_POST) && isset($_POST["login"])) {
         session_start();
         // grava um usuário na sessão
         $_SESSION["usuario"] = $_POST["login"];
-        header("Location: index.php");
+        header("Location: teste.php");
     } else
         echo '<div class="alert alert-danger" role="alert">
-	    Usuário e/ou senha inválidos!
+	    Email e/ou senha inválidos!
 	    </div>';
 }
 ?>
@@ -72,11 +72,10 @@ require 'btsinclude.html';
 			<h3>Login na Conta</h3>
 			<form action="" method="post" name="frmLogin"
 				style="padding-bottom: 10px">
-				Email: <input type="text" name="login" class="form-control"
-					maxlength="20" required="required" placeholder="Email"
-					autofocus="autofocus" /><br /> Senha: <input type="password"
-					name="senha" class="form-control" maxlength="20"
-					placeholder="Senha" required="required" /><br />
+				Email: <input type="text" name="login" class="form-control"	maxlength="40" required="required" placeholder="Email" autofocus="autofocus" />
+				<br/> 
+				Senha: <input type="password" name="senha" class="form-control" maxlength="20" placeholder="Senha" required="required" />
+				<br/>
 				<button name="btnLogin" class="btn btn-primary" type="submit">Login</button>
 				&nbsp;
 			</form>

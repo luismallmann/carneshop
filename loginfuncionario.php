@@ -17,7 +17,7 @@ if (isset($_POST) && isset($_POST["login"])) {
 	    session_start();
 	    // grava um usuário na sessão
 	    $_SESSION["usuario"] = $_POST["login"]; 
-	   header("Location: loginusuario.php");
+	   header("Location: teste.php");
 	}
 	else 
 	    echo '<div class="alert alert-danger" role="alert">
