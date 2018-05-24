@@ -14,3 +14,8 @@
         // retorno é um array associativo
         return $retorno["conta"] > 0;
     }
+    
+    function cadastraUsuario(){
+        
+    }
+?>

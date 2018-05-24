@@ -1,4 +1,25 @@
+<?php
 
+// require 'dao/usuariodao.php';
+session_start();
+
+if (isset($_POST) && isset($_POST["login"])) {
+    // envia para a página principal
+    // podemos utilizar a função header + location
+    $login = $_POST["login"];
+    $senha = $_POST["senha"];
+    if (validaLogin($login, $senha)) {
+        // iniciando uma sessão
+        session_start();
+        // grava um usuário na sessão
+        $_SESSION["usuario"] = $_POST["login"];
+        header("Location: index.php");
+    } else
+        echo '<div class="alert alert-danger" role="alert">
+	    Usuário e/ou senha inválidos!
+	    </div>';
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +39,7 @@ require 'btsinclude.html';
 		</div>
 		<div class="col-md-auto"></div>
 		<div class="col">
-		<img src="img/carne.png" alt="CarneShop" title="CarneShop">
-			</a>
+			<img src="img/carne.png" alt="CarneShop" title="CarneShop"> </a>
 		</div>
 	</div>
 </div>
@@ -42,57 +62,84 @@ require 'btsinclude.html';
 <title>Cadastro de cliente</title>
 </head>
 <body>
+	<!-- mascara cpf -->
+	<script>
+function formatar(mascara, documento){
+  var i = documento.value.length;
+  var saida = mascara.substring(0,1);
+  var texto = mascara.substring(i)
+  
+  if (texto.substring(0,1) != saida){
+            documento.value += texto.substring(0,1);
+  }
+  
+}
+</script>
+
 	<div class="container">
 		<div class="box">
 			<h3>Formulário de cadastro</h3>
 			<form>
+			<div class="form-group">
+					<label for="inserirNome">Nome Completo</label> <input type="text" name="nome" required="required" class="form-control" 
+					placeholder="Nome e Sobrenome" maxlength="40">
+				</div>
 				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="inputEmail4">Email</label> <input type="email"
-							class="form-control" id="inputEmail4" placeholder="Email">
-					</div>
-					<div class="form-group col-md-6">
-						<label for="inputPassword4">Senha</label> <input type="password"
-							class="form-control" id="inputPassword4" placeholder="Senha">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputAddress">Nome Completo</label> <input type="text"
-						class="form-control" id="inputAddress"
-						placeholder="Nome e Sobrenome">
-				</div>
-				<div class="form-group">
-					<label for="inputAddress">Telefone</label> <input type="number"
-						class="form-control" id="inputAddress"
-						placeholder="(xx) xxxxx-xxxx">
-				</div>
-
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="inputCity">Cidade</label> <input type="text"
-							class="form-control" id="inputCity">
+					<div class="form-group col-md-4">
+						<label for="inserirCPF">CPF</label> <input type="text" name="cpf" required="required" class="form-control" maxlength="14"
+							OnKeyPress="formatar('###.###.###-##', this)">
 					</div>
 					<div class="form-group col-md-4">
-						<label for="inputState">Estado</label> <select id="inputState"
-							class="form-control">
-							<option selected>Santa Catarina</option>
-							<option>Paraná</option>
-							<option>Rio Grande do Sul</option>
-						</select>
+						<label for="inserirNascimento">Data de Nascimento</label> <input type="date" name="datanas" required="required" class="form-control">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inserirEmail">Email</label> <input type="email" name="email" required="required"
+							class="form-control" placeholder="Email" maxlength="40">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inserirSenha">Senha</label> <input type="password" name="senha" required="required"	class="form-control" 
+						placeholder="Senha" maxlength="12">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-2">
+						<label for="inserirDDD">DDD</label> <input type="text" name="ddd" required="required" class="form-control" maxlength="2" placeholder="(xx)">
+					</div>
+					<div class="form-group col-md-4">
+						<label for="inserirTelefone">Telefone</label> <input type="text" name="telefone" required="required"  placeholder="xxxxx-xxxx"
+						class="form-control"OnKeyPress="formatar('#####-####', this)" maxlength="10">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inserirCidade">Cidade</label> <input type="text" name="cidade" required="required" class="form-control" maxlength="30">
 					</div>
 					<div class="form-group col-md-2">
-						<label for="inputZip">CEP</label> <input type="text"
-							class="form-control" id="inputZip">
+						<label for="inserirUF">Estado</label> <select id="inputState" required="required" class="form-control">
+							<option selected>SC</option>
+							<option>PR</option>
+							<option>RS</option>
+						</select>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="inserirCEP">CEP</label> <input type="text" name="CEP" required="required" class="form-control" maxlength="9"
+							OnKeyPress="formatar('#####-##', this)">
 					</div>
 				</div>
 				<div class="form-row">
-					<div class="form-group col-md-4">
-						<label for="inputAddress2">Rua</label> <input type="text"
-							class="form-control" id="inputAddress2">
+					<div class="form-group col-md-5">
+						<label for="inserirRua">Rua</label> <input type="text" name="rua" required="required" class="form-control" maxlength="40>
 					</div>
-					<div class="form-group col-md-4">
-						<label for="inputAddress2">Número / Complemento</label> <input
-							type="text" class="form-control" id="inputAddress2">
+					<div class="form-group col-md-2">
+						<label for="inputAddress2">Número</label> <input type="text" name="numeroEndereco" required="required" class="form-control" maxlength="5">
+					</div>
+					<div class="form-group col-md-3">
+						<label for="inserirComplemento">Complemento</label> <input type="text" name="complemento" class="form-control" maxlength="20">
+					</div>
+					<div class="form-group col-md-2">
+						<label for="inserirBairro">Bairro</label> <input type="text" name="bairro" required="required" class="form-control" maxlength="20">
 					</div>
 				</div>
 

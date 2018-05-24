@@ -8,7 +8,7 @@ CREATE TABLE cliente (
   nomclnt varchar(40) NOT NULL, 
   nasclnt date NOT NULL, 
   emlclnt varchar(40) NOT NULL UNIQUE, 
-  senclnt varchar(12) NOT NULL, 
+  senclnt varchar(32) NOT NULL, 
   PRIMARY KEY (cpfclnt));
 COMMENT ON TABLE cliente IS 'Tabela que contém os dados pessoais de cada cliente.';
 COMMENT ON COLUMN cliente.cpfclnt IS 'CPF do Cliente';
@@ -39,7 +39,7 @@ CREATE TABLE funcionario (
   codfun SERIAL NOT NULL 			, 
   nomfun varchar(40) NOT NULL 	, 
   logfun varchar(20) NOT NULL UNIQUE 	, 
-  senfun varchar(12) NOT NULL, 
+  senfun varchar(32) NOT NULL, 
   PRIMARY KEY (codfun));
 COMMENT ON TABLE funcionario IS 'detalhamento do funcionario/administrador do sistema';
 COMMENT ON COLUMN funcionario.codfun IS 'código do funcionario';
