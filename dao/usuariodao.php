@@ -71,7 +71,7 @@ function cadastraUsuario($usuario)
     }
 }
 
-function cadastraProduto($produto)
+function cadastraProduto($produto, $caminho_imagem)
 /*
  * conexao tela de cadastro do produto com o bd
  */
@@ -87,7 +87,7 @@ function cadastraProduto($produto)
             $produto['nome'],
             $produto['preco'],
             $produto['estoque'],
-            $produto['imagem']
+            $caminho_imagem
         ]);
 
         return true;

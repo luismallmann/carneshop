@@ -1,10 +1,39 @@
 <?php
 require 'dao/usuariodao.php';
+
+$imagem = $_FILES['imagem'];
+if (!empty($imagem["name"])) {
+
+
+// Pega as dimensões da imagem
+$dimensoes = getimagesize($imagem["tmp_name"]);
+
+// Verifica se a largura da imagem é maior que a largura permitida
+if(($dimensoes[0] > 180) || ($dimensoes[1] > 140) ) {
+    echo '<script> alert("Tamanho da imagem não deve ultrapassar 180px X 140px. Tamanho Atual: '.$dimensoes[0].'px X '.$dimensoes[1].'px);</script>';
+}
+
+
+// Pega extensão da imagem
+preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $imagem["name"], $ext);
+
+// Gera um nome único para a imagem
+$nome_imagem = md5(uniqid(time())) . "." . $ext[1];
+
+// Caminho de onde ficará a imagem
+$caminho_imagem = "imgproduto/" . $nome_imagem;
+
+// Faz o upload da imagem para seu respectivo caminho
+move_uploaded_file($imagem["tmp_name"], $caminho_imagem);
+
+}
+
 if (isset($_POST) && isset($_POST['nome']) && isset($_POST['estoque']) && isset($_POST['preco'])) {
-    cadastraProduto($_POST);
+    cadastraProduto($_POST, $nome_imagem);
 } else {
     echo "erro";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +76,7 @@ require 'btsinclude.html';
 	<div class="container">
 		<div class="box">
 			<h3>Cadastro de Produto</h3>
-			<form action="" method="post" name="frmCadastroProduto">
+			<form action="" method="post" name="frmCadastroProduto" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col">
 						<label for="inputname">Nome do Produto</label> <input type="text"
@@ -63,15 +92,15 @@ require 'btsinclude.html';
 							placeholder="Estoque" required="required" min="0">
 					</div>
 					<div class="col">
-						<label for="inputpreço">Preço por Kg (R$)</label> <input type="text"
-							name="preco" class="form-control" placeholder="Preço"
+						<label for="inputpreço">Preço por Kg (R$)</label> <input
+							type="text" name="preco" class="form-control" placeholder="Preço"
 							required="required" min="0" id="moeda">
 					</div>
 				</div>
 				<br>
 				<div class="form-row">
 					<div class="col">
-						<label for="inputimagem">Imagem (500x500 pixels)</label> <input
+						<label for="inputimagem">Imagem (tamanho máximo 180x140 pixels)</label> <input
 							type="file" name="imagem" class="form-control"
 							placeholder="Imagem" accept="image/*">
 					</div>
