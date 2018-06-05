@@ -17,22 +17,7 @@
 <?php
 require 'btsinclude.html';
 ?>
-	<div id="box-topo" class="container-1230"
-		style="background-color: #8f5227";>
-		<div class="row">
-			<div class="col">
-				<a href="/carneshop/restrito_funcionario.php"> <img
-					src="img/logo.png" alt="CarneShop" title="CarneShop">
-				</a>
-			</div>
-			<div class="col-md-auto">
-			</div>
-			<div class="col">
-				<img src="img/carne.png" alt="CarneShop" title="CarneShop">
-				</a>
-			</div>
-		</div>
-	</div>
+	
 </header>
 <body>
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -52,9 +37,9 @@ require 'btsinclude.html';
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-inicio" role="tabpanel" aria-labelledby="pills-inicio-tab">Seja bem vindo ao Sistema Especial de E-commerce que nem funciona do brasil que apoia o apoio apoiado dos camioneiros!<br><br>Suporte com ......</div>
-  <div class="tab-pane fade" id="pills-clientes" role="tabpanel" aria-labelledby="pills-clientes-tab">..2.</div>
-  <div class="tab-pane fade" id="pills-estoque" role="tabpanel" aria-labelledby="pills-estoque-tab">..3.</div>
-  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">..3.</div>
+  <div class="tab-pane fade" id="pills-clientes" role="tabpanel" aria-labelledby="pills-clientes-tab"><?php include "cadastro_cliente_formulario.php"; ?></div>
+  <div class="tab-pane fade" id="pills-estoque" role="tabpanel" aria-labelledby="pills-estoque-tab"><?php include "cadastroproduto.php"; ?></div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"><?php include "cadastro_funcionario_formulario.php"; ?></div>
 </div>
 </body>
 </html>
