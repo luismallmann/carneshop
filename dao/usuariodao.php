@@ -92,7 +92,7 @@ function cadastraProduto($produto, $caminho_imagem)
 
         return true;
     } catch (PDOException $e) {
-        return false;
+        return $e;
     }
 }
 ?>
