@@ -1,10 +1,5 @@
-CREATE SEQUENCE seq_endereco_cliente;
-CREATE SEQUENCE seq_pedido;
-CREATE SEQUENCE seq_produto;
-CREATE SEQUENCE seq_telefone_cliente;
-CREATE SEQUENCE seq_venda;
 CREATE TABLE cliente (
-  cpfclnt SERIAL NOT NULL, 
+  cpfclnt numeric(11, 0) NOT NULL, 
   nomclnt varchar(40) NOT NULL, 
   nasclnt date NOT NULL, 
   emlclnt varchar(40) NOT NULL UNIQUE, 
@@ -16,15 +11,15 @@ COMMENT ON COLUMN cliente.nomclnt IS 'Nome do Cliente';
 COMMENT ON COLUMN cliente.nasclnt IS 'Data de Nascimento do Cliente';
 COMMENT ON COLUMN cliente.emlclnt IS 'Email do Cliete';
 CREATE TABLE endereco_cliente (
-  codendclnt     int4 NOT NULL, 
+  codendclnt     SERIAL NOT NULL, 
   cidendclnt     varchar(30) NOT NULL, 
   estendclnt     varchar(2) NOT NULL, 
-  cependclnt     int4 NOT NULL, 
+  cependclnt     numeric(8, 0) NOT NULL, 
   ruaendclnt     varchar(40) NOT NULL, 
   numendclnt     varchar(5) NOT NULL, 
   baiendclnt     varchar(20) NOT NULL, 
   cmpendclnt     varchar(20), 
-  clientecpfclnt int4 NOT NULL, 
+  clientecpfclnt numeric(11, 0) NOT NULL, 
   PRIMARY KEY (codendclnt));
 COMMENT ON TABLE endereco_cliente IS 'Enderecos do cliente. Pode haver mais de um';
 COMMENT ON COLUMN endereco_cliente.codendclnt IS 'codigo do endereco do cliente. é gerado automaticamente de forma sequencial.';
@@ -47,20 +42,20 @@ COMMENT ON COLUMN funcionario.nomfun IS 'nome do funcionario';
 COMMENT ON COLUMN funcionario.logfun IS 'login do funcionario';
 COMMENT ON COLUMN funcionario.senfun IS 'senha do funcionario';
 CREATE TABLE pedido (
-  codped         int4 NOT NULL, 
+  codped         SERIAL NOT NULL, 
   qntped         int4 NOT NULL, 
-  clientecpfclnt int4 NOT NULL, 
+  clientecpfclnt numeric(11, 0) NOT NULL, 
   PRIMARY KEY (codped));
 COMMENT ON TABLE pedido IS 'gerenciamento dos produtos comprados';
 COMMENT ON COLUMN pedido.codped IS 'codigo do pedido';
 COMMENT ON COLUMN pedido.qntped IS 'quantidade de itens pedidos';
 CREATE TABLE pedido_produto (
-  produtocodprod int4 NOT NULL, 
+  produtocodprod SERIAL NOT NULL, 
   pedidocodped   int4 NOT NULL, 
   PRIMARY KEY (produtocodprod, 
   pedidocodped));
 CREATE TABLE produto (
-  codprod int4 NOT NULL 	, 
+  codprod SERIAL NOT NULL 	, 
   desprod varchar(140), 
   nomprod varchar(40) NOT NULL 		, 
   valprod numeric(10, 2) NOT NULL, 
@@ -74,16 +69,16 @@ COMMENT ON COLUMN produto.nomprod IS 'nome do produto';
 COMMENT ON COLUMN produto.valprod IS 'valor do produto(RS)      ';
 COMMENT ON COLUMN produto.estprod IS 'quantidade em estoque do produto';
 CREATE TABLE telefone_cliente (
-  codtelclnt     int4 NOT NULL, 
-  dddtelclnt     int4 NOT NULL, 
-  numtelclnt     int4 NOT NULL, 
-  clientecpfclnt int4 NOT NULL, 
+  codtelclnt    SERIAL NOT NULL, 
+  dddtelclnt     numeric(2, 0) NOT NULL, 
+  numtelclnt     numeric(9, 0) NOT NULL, 
+  clientecpfclnt numeric(11, 0) NOT NULL, 
   PRIMARY KEY (codtelclnt));
 COMMENT ON COLUMN telefone_cliente.codtelclnt IS 'codigo do telefone do cliente. gerado automaticamente de forma sequencial';
 COMMENT ON COLUMN telefone_cliente.dddtelclnt IS 'DDD do telefone do cliente.';
 COMMENT ON COLUMN telefone_cliente.numtelclnt IS 'numero do telefone cadastrado para o cliente';
 CREATE TABLE venda (
-  codvenda     int4 NOT NULL, 
+  codvenda     SERIAL NOT NULL, 
   valvenda     numeric(6, 2) NOT NULL 		, 
   stsvenda     varchar(140) NOT NULL 	, 
   datvenda     date NOT NULL, 
