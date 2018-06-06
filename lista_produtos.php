@@ -39,24 +39,22 @@ require 'btsinclude.html';
     <?php
 	    $produto = lista();
         if ($produto != null && count($produto) > 0) {
-            echo "<table border='1'>";
-            echo "<tr> <td>imagem</td> <td>nome</td> </tr>";
+        	echo "<div align='center'>";
+            echo "<table>";
             foreach ($produto as $cat) {
                 echo "<tr>";
 	                echo "<td>";
     		            echo "<img src='imgproduto/" . $cat["imgprod"]."'/>";
             	    echo "</td>";
                 	echo "<td>";
-                		echo $cat["nomprod"];
-                		echo "<br/>";
-                		echo "Descrição: ";
-                		echo $cat["desprod"];
-                		echo "<br />";
-                		echo "Preco por kg: ";
-                		echo $cat["valprod"];
-                		echo "<br />";
+                		echo "<p style='text-align: center; padding: 10px 0px 0px; color: #B22222; font-size: 30px; font-family: Impact, fantasy;'>" . $cat['nomprod'] . "</p>";
+                		
+                		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>" . $cat["desprod"] . "</p>";
+                		
+                		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>Preço por kg: R$ "  . $cat["valprod"] . "</p>";
+                		
 
-                		echo "<form action='' method='post' name='frmAdicionar'>
+                		echo "<form style='padding: 10px' action='' method='post' name='frmAdicionar'>
 									<div class='input-group mb-1'>
 										<div class='input-group-prepend'>
 											<div class='input-group-text'>+/-</div>
@@ -66,12 +64,13 @@ require 'btsinclude.html';
 									</div>
 							</div>
 						</div>
-						<button name='add' class='btn btn-danger' type='submit'>Adicionar</button>
+						<button style='margin: 3px 30%' name='add' class='btn btn-danger' type='submit'>Adicionar</button>
 						</form>";
                		echo "</td>";
                 echo "</tr>";
             }
             echo "</table>";
+            echo "</div>";
         }
         else {
             echo "Não existem produtos cadastrados!";
