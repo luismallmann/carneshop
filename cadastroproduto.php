@@ -95,8 +95,8 @@ if (! empty($_FILES['imagem'])) {
     $dimensoes = getimagesize($imagem["tmp_name"]);
     
     // Verifica se a largura da imagem é maior que a largura permitida
-    if ($dimensoes[0] > 180 || ($dimensoes[1] > 140)) {
-        echo '<script> alert("Tamanho da imagem não deve ultrapassar 180px X 140px. Tamanho Atual: ' . $dimensoes[0] . 'px X ' . $dimensoes[1] . 'px");</script>';
+    if ($dimensoes[0] > 260 || ($dimensoes[1] > 260)) {
+        echo '<script> alert("Tamanho da imagem não deve ultrapassar 260px X 260px. Tamanho Atual: ' . $dimensoes[0] . 'px X ' . $dimensoes[1] . 'px");</script>';
         
         $teste = false;
     }
