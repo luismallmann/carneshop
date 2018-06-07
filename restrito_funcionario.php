@@ -25,7 +25,7 @@ require 'btsinclude.html';
     <a class="nav-link active" id="pills-inicio-tab" data-toggle="pill" href="#pills-inicio" role="tab" aria-controls="pills-inicio" aria-selected="true">Inicio</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="pills-estoque-tab" data-toggle="pill" href="#pills-estoque" role="tab" aria-controls="pills-contact" aria-selected="false">estoque produtos</a>
+    <a class="nav-link" id="pills-estoque-tab" data-toggle="pill" href="#pills-estoque" role="tab" aria-controls="pills-contact" aria-selected="false">Lista de Produtos</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" id="pills-clientes-tab" data-toggle="pill" href="#pills-clientes" role="tab" aria-controls="pills-clientes" aria-selected="false">Cadastro clientes</a>
@@ -38,7 +38,7 @@ require 'btsinclude.html';
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-inicio" role="tabpanel" aria-labelledby="pills-inicio-tab">Seja bem vindo ao Sistema Especial de E-commerce que nem funciona do brasil que apoia o apoio apoiado dos camioneiros!<br><br>Suporte com ......</div>
   <div class="tab-pane fade" id="pills-clientes" role="tabpanel" aria-labelledby="pills-clientes-tab"><?php include "cadastro_cliente_formulario.php"; ?></div>
-  <div class="tab-pane fade" id="pills-estoque" role="tabpanel" aria-labelledby="pills-estoque-tab"><?php include "cadastroproduto.php"; ?></div>
+  <div class="tab-pane fade" id="pills-estoque" role="tabpanel" aria-labelledby="pills-estoque-tab"><?php include "listadeprodutos.php"; ?></div>
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"><?php include "cadastro_funcionario_formulario.php"; ?></div>
 </div>
 </body>

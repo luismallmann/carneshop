@@ -27,3 +27,26 @@ function lista()
         return null;
     }
 }
+function atualiza($produto)
+{
+    global $conexao;
+    try{
+        $comando = $conexao->prepare("update categoria set nomprod = ?, desprod = ?, valprod = ?, estprod = ?, imgprod = ? where codprod = ?");
+        $comando->execute([$produto["nome"], $produto["descrição"],$categoria["preço"], $categoria["estoque"], $categoria["imagem"], $produto["codigo"]]);
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+function exclui(int $codigo)
+{
+    global $conexao;
+    try{
+        $comando = $conexao->prepare("delete from categoria where codcat = ?");
+        $comando->execute([$codigo]);
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+
+}

@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <!-- chama o topo/cabeçalho e o bootstrap -->
-	<?php
+<?php
 require 'btsinclude.html';
+require 'dao/produtodao.php';
 ?>
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
