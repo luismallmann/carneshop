@@ -67,7 +67,8 @@ function cadastraUsuario($usuario)
         ]);
         return true;
     } catch (PDOException $e) {
-        return false;
+        return $e;
+        //echo $e->getMessage();
     }
 }
 
