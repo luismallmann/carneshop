@@ -31,9 +31,55 @@ require 'btsinclude.html';
 		</div>
 	</div>
 </div>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+</style>
+
 </head>
 <body>
 <h1><font color="#8f5227"> Carrinho de Compras </font></h1>
+<div>
+<?php
+	    $produto = lista();
+        if ($produto != null && count($produto) > 0) {
+        	echo "<div align='center'>";
+            echo "<table style='width:100%'>";
+            echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
+            echo "<th></th><th>Nome do Produto</th><th>Quantidade</th><th>Valor por Kg(R$)</th><th>Valor Total(R$)</th>";
+            echo"<tr>";
+            foreach ($produto as $cat) {
+                echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
+	                echo "<td><img src='imgproduto/" . $cat["imgprod"]."'/></td>";
+                	echo "<td>". $cat['nomprod']."</td>";
+                	echo "<td>". $cat["desprod"] . "</td>";
+                   	echo "<td>".$cat["valprod"]."</td>";
+                   	echo "<td>".$cat["valprod"]."</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+            echo "</div>";
+        }
+        else {
+            echo "Não existem produtos cadastrados!";
+        }
+        
+        
+        //necessario ajustar a parte php
+        ?>
+
+
+
+
+
+</div>
 
 
 	<div class="row">
