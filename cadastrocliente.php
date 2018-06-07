@@ -44,7 +44,7 @@ require 'btsinclude.html';
 </body>
 </html>
 <?php
-require 'dao/usuariodao.php';
+require 'dao/clientedao.php';
 if (isset($_POST) && isset($_POST["nome"]) && isset($_POST["cpf"]) && isset($_POST["datanas"]) && isset($_POST["email"]) && isset($_POST["senha"]) && isset($_POST["ddd"]) && isset($_POST["telefone"]) && isset($_POST["cidade"]) && isset($_POST["estado"]) && isset($_POST["CEP"]) && isset($_POST["rua"])   && isset($_POST["numEnd"]) && isset($_POST["bairro"])) {
      cadastraUsuario($_POST);
 } 

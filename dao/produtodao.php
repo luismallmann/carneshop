@@ -1,9 +1,30 @@
 <?php
 require 'db/conexao.php';
 
-/**
- * Insere um novo categoria
+function cadastraProduto($produto, $caminho_imagem)
+/*
+ * conexao tela de cadastro do produto com o bd
  */
+{
+    global $conexao; // acessa a variável conexão
+    try {
+        //insere os dados na tabela produto
+        $comando = $conexao->prepare('INSERT INTO PRODUTO(DESPROD, NOMPROD, VALPROD,
+         ESTPROD, IMGPROD) VALUES(?,?,?,?,?)');
+              
+        $comando->execute([
+            $produto['descricao'],
+            $produto['nome'],
+            $produto['preco'],
+            $produto['estoque'],
+            $caminho_imagem
+        ]);
+
+        return true;
+    } catch (PDOException $e) {
+        return $e;
+    }
+}
 
 function lista()
 {

@@ -84,7 +84,7 @@ require 'btsinclude.html';
 </body>
 </html>
 <?php
-require 'dao/usuariodao.php';
+require 'dao/produtodao.php';
 if (! empty($_FILES['imagem'])) {
     $imagem = $_FILES['imagem'];
     $teste = true;
