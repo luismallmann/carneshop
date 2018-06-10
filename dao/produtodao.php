@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require 'db/conexao.php';
 
 function cadastraProduto($produto, $caminho_imagem)
@@ -71,3 +71,19 @@ function exclui(int $codigo)
     }
 
 }
+function buscaProduto()
+{
+    global $conexao;
+    
+    try {
+        $comando = $conexao->prepare("select * from produto
+         where codprod = ?"); // ordenação por padrão é ascendente
+        $comando->execute([$codprod]);
+        return $produto;
+    } catch (PDOException $e) {
+        return null;
+    }
+}
+
+
+?>

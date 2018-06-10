@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     require 'db/conexao.php';
         
     // função pra validar o login
@@ -67,3 +67,17 @@
             //echo $e->getMessage();
         }
     }
+    
+    function buscaCPF($login) {
+        global $conexao; // acessa a variável conexão
+        // consulta - select
+        $comando = $conexao->prepare('select cpfclnt from cliente where emlclnt = ?');
+        // executa a consulta
+        $comando->execute([$login]);
+        // descarregar o resultado
+        $retorno = $comando->fetch(PDO::FETCH_ASSOC);
+        // retorno é um array associativo
+        
+        return $retorno['cpfclnt'];
+    }
+?>

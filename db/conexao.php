@@ -5,6 +5,7 @@ try {
         // usuario, senha
         'postgres', 'postgres');
    // echo 'Conectou ao banco de dados!';
+    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo $e->getMessage();
 }

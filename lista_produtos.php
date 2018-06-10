@@ -1,11 +1,26 @@
 <?php
-
 require 'dao/produtodao.php';
-
-if (isset($_POST) && isset($_POST["produtoX"])) {
-    $produtoX = $_POST["produtoX"];
+if (isset($_POST) && isset($_POST["qntdped"])){   
     
-    header("Location: loginusuario.php");
+    $codprod= $_POST["codprod"];
+    $qntdped=$_POST["qntdped"];
+    
+    // usa a mesma sessão criada no login
+    $params='?'.http_build_query(array('codprod'=>$codprod, 'qntdped'=>$qntdped));
+    
+    session_start();
+    if (isset($_SESSION["login"])){
+        $login = $_SESSION["login"];
+        $codped = $_SESSION["codped"];
+        require 'dao/pedidodao.php';
+        atualizaPedido($codped, $codprod, $qntdped);
+        
+        header("Location: carrinho.php");
+    }
+    else header("Location: loginusuario.php".$params);
+
+   
+   
 }
 ?>
 <!DOCTYPE html>
@@ -33,34 +48,64 @@ require 'btsinclude.html';
 	</div>
 </div>
 
+<style type="text/css">
 
+		.window{
+			display:none;
+			width:300px;
+			height:300px;
+			position:absolute;
+			left:0;
+			top:0;
+			background:#FFF;
+			z-index:9900;
+			padding:10px;
+			border-radius:10px;
+		}
+
+		#mascara{
+			position:absolute;
+  			left:0;
+  			top:0;
+  			z-index:9000;
+  			background-color:#000;
+  			display:none;
+		}
+
+		.fechar{display:block; text-align:right;}
+
+		</style>
 </head>
+
+
 <body>	
     <?php
 	    $produto = lista();
         if ($produto != null && count($produto) > 0) {
         	echo "<div align='center'>";
             echo "<table>";
-            foreach ($produto as $cat) {
+            foreach ($produto as $buscaProduto) {
                 echo "<tr>";
 	                echo "<td>";
-    		            echo "<img src='imgproduto/" . $cat["imgprod"]."'/>";
+    		            echo "<img src='imgproduto/" . $buscaProduto["imgprod"]."'/>";
             	    echo "</td>";
                 	echo "<td>";
-                		echo "<p style='text-align: center; padding: 10px 0px 0px; color: #B22222; font-size: 30px; font-family: Impact, fantasy;'>" . $cat['nomprod'] . "</p>";
+                		echo "<p style='text-align: center; padding: 10px 0px 0px; color: #B22222; font-size: 30px; font-family: Impact, fantasy;'>" . $buscaProduto['nomprod'] . "</p>";
                 		
-                		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>" . $cat["desprod"] . "</p>";
+                		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>" . $buscaProduto["desprod"] . "</p>";
                 		
-                		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>Preço por kg: R$ "  . $cat["valprod"] . "</p>";
+                		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>Preço por kg: R$ "  . $buscaProduto["valprod"] . "</p>";
                 		
 
-                		echo "<form style='padding: 10px' action='' method='post' name='frmAdicionar'>
+                		echo "<form style='padding: 10px' action='' method='post' name='frmAdicionar".$buscaProduto["codprod"]."'>
 									<div class='input-group mb-1'>
 										<div class='input-group-prepend'>
 											<div class='input-group-text'>+/-</div>
 										</div>
-										<input type='number' name='produtoX' class='form-control'
-											id='quantidade' value='1' min='1'>
+                                        <input type='hidden' name='codprod' class='form-control'
+											id='cod' value='".$buscaProduto["codprod"]."'>            
+										<input type='number' name='qntdped' class='form-control'
+											id='quantidade' value='' min='1'>
 									</div>
 							</div>
 						</div>

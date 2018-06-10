@@ -1,11 +1,14 @@
 <?php
-require 'dao/produtodao.php';
+require 'dao/pedidodao.php';
+session_start();
 
-if (isset($_POST) && isset($_POST["produtoX"])) {
-    $produtoX = $_POST["produtoX"];
-    
-    header("Location: loginusuario.php");
+if (isset($_SESSION) && ($_SESSION["codped"]) && ($_SESSION["qntdped"])) {
+    $codped = $_SESSION["codped"];
+    $qntped = $_SESSION["qntdped"];
+ 
 }
+else 
+    echo "erro";
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,20 +51,22 @@ td, th {
 <h1><font color="#8f5227"> Carrinho de Compras </font></h1>
 <div>
 <?php
-	    $produto = lista();
-        if ($produto != null && count($produto) > 0) {
+	    $item = listaProdutos($codpes);
+        if ($item != null && count($item) > 0) {
         	echo "<div align='center'>";
             echo "<table style='width:100%'>";
             echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
             echo "<th td colspan='2'>Nome do Produto</th><th>Quantidade</th><th>Valor por Kg(R$)</th><th>Valor Total(R$)</th>";
             echo"<tr>";
-            foreach ($produto as $cat) {
+            foreach ($item as $produto) {
+                //aqui deve ser buscado os item confome codprod e quantidade armazenados no banco
+
                 echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
-	                echo "<td><img src='imgproduto/" . $cat["imgprod"]."'/></td>";
-                	echo "<td>". $cat['nomprod']."</td>";
-                	echo "<td>". $cat["desprod"] . "</td>";
-                   	echo "<td>".$cat["valprod"]."</td>";
-                   	echo "<td>".$cat["valprod"]."</td>";
+	                echo "<td><img src='imgproduto/" . $produto["imgprod"]."'/></td>";
+                	echo "<td>". $produto['nomprod']."</td>";
+                	echo "<td>". $produto["desprod"] . "</td>";
+                   	echo "<td>".$produto["valprod"]."</td>";
+                   	echo "<td>".$produto["valprod"]."</td>";
                 echo "</tr>";
             }
             echo "</table>";

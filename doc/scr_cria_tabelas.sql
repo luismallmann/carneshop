@@ -1,8 +1,3 @@
-CREATE SEQUENCE seq_endereco_cliente;
-CREATE SEQUENCE seq_pedido;
-CREATE SEQUENCE seq_produto;
-CREATE SEQUENCE seq_telefone_cliente;
-CREATE SEQUENCE seq_venda;
 CREATE TABLE cliente (
   cpfclnt numeric(11, 0) NOT NULL, 
   nomclnt varchar(40) NOT NULL, 
@@ -16,7 +11,7 @@ COMMENT ON COLUMN cliente.nomclnt IS 'Nome do Cliente';
 COMMENT ON COLUMN cliente.nasclnt IS 'Data de Nascimento do Cliente';
 COMMENT ON COLUMN cliente.emlclnt IS 'Email do Cliete';
 CREATE TABLE endereco_cliente (
-  codendclnt     int4 NOT NULL, 
+  codendclnt     SERIAL NOT NULL, 
   cidendclnt     varchar(30) NOT NULL, 
   estendclnt     varchar(2) NOT NULL, 
   cependclnt     numeric(8, 0) NOT NULL, 
@@ -47,20 +42,21 @@ COMMENT ON COLUMN funcionario.nomfun IS 'nome do funcionario';
 COMMENT ON COLUMN funcionario.logfun IS 'login do funcionario';
 COMMENT ON COLUMN funcionario.senfun IS 'senha do funcionario';
 CREATE TABLE pedido (
-  codped         int4 NOT NULL, 
+  codped         SERIAL NOT NULL, 
   clientecpfclnt numeric(11, 0) NOT NULL, 
   PRIMARY KEY (codped));
 COMMENT ON TABLE pedido IS 'gerenciamento dos produtos comprados';
 COMMENT ON COLUMN pedido.codped IS 'codigo do pedido';
 CREATE TABLE pedido_produto (
+  itempedidoprod SERIAL NOT NULL, 
   produtocodprod int4 NOT NULL, 
   pedidocodped   int4 NOT NULL, 
   qntped         int4 NOT NULL, 
-  PRIMARY KEY (produtocodprod, 
-  pedidocodped));
+  PRIMARY KEY (itempedidoprod));
+COMMENT ON COLUMN pedido_produto.itempedidoprod IS 'item do produto no pedido (ex: 1,2,3...)';
 COMMENT ON COLUMN pedido_produto.qntped IS 'quantidade de itens pedidos';
 CREATE TABLE produto (
-  codprod int4 NOT NULL 	, 
+  codprod SERIAL NOT NULL 	, 
   desprod varchar(140), 
   nomprod varchar(40) NOT NULL 		, 
   valprod numeric(10, 2) NOT NULL, 
@@ -74,7 +70,7 @@ COMMENT ON COLUMN produto.nomprod IS 'nome do produto';
 COMMENT ON COLUMN produto.valprod IS 'valor do produto(RS)      ';
 COMMENT ON COLUMN produto.estprod IS 'quantidade em estoque do produto';
 CREATE TABLE telefone_cliente (
-  codtelclnt     int4 NOT NULL, 
+  codtelclnt     SERIAL NOT NULL, 
   dddtelclnt     numeric(2, 0) NOT NULL, 
   numtelclnt     numeric(9, 0) NOT NULL, 
   clientecpfclnt numeric(11, 0) NOT NULL, 
@@ -83,7 +79,7 @@ COMMENT ON COLUMN telefone_cliente.codtelclnt IS 'codigo do telefone do cliente.
 COMMENT ON COLUMN telefone_cliente.dddtelclnt IS 'DDD do telefone do cliente.';
 COMMENT ON COLUMN telefone_cliente.numtelclnt IS 'numero do telefone cadastrado para o cliente';
 CREATE TABLE venda (
-  codvenda     int4 NOT NULL, 
+  codvenda     SERIAL NOT NULL, 
   valvenda     numeric(6, 2) NOT NULL 		, 
   stsvenda     varchar(140) NOT NULL 	, 
   datvenda     date NOT NULL, 

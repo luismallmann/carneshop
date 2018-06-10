@@ -1,22 +1,32 @@
 <?php
-
-require 'dao/clientedao.php';
-session_start();
-
-if (isset($_SESSION) && isset($_SESSION["login"]))
-    session_destroy();
-
 if (isset($_POST) && isset($_POST["login"])) {
+    require 'dao/clientedao.php';
     // envia para a página principal
     // podemos utilizar a função header + location
     $login = $_POST["login"];
     $senha = $_POST["senha"];
     if (validaLogin($login, $senha)) {
-        // iniciando uma sessão
+        //iniciando uma sessão
         session_start();
-        // grava um usuário na sessão
-        $_SESSION["usuario"] = $_POST["login"];
-        header("Location: teste.php");
+        //grava um usuário na sessão
+        $_SESSION["login"] = $_POST["login"]; 
+        
+        $codprod= $_GET["codprod"];
+        $qntdped = $_GET["qntdped"];
+        //grava produto do pedido no banco
+      
+        require 'dao/pedidodao.php';
+        $cpfclnt = buscaCPF($login);
+        
+        $codped = cadastraPedidoNovo($cpfclnt);
+        
+        if($codped != null){            
+             $_SESSION["codped"]=$codped;
+             cadastraPedido($codprod, $codped, $qntdped);
+             header("Location: carrinho.php");
+        }
+        else  
+            echo "erro ao cadastrar";
     } else
         echo '<div class="alert alert-danger" role="alert">
 	    Email e/ou senha inválidos!
