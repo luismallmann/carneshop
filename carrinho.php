@@ -21,7 +21,7 @@ require 'btsinclude.html';
 	style="background-color: #8f5227";>
 	<div class="row">
 		<div class="col">
-			<a href="http://localhost/carneshop/lista_produtos.php"> <img
+			<a href="index.php"> <img
 				src="img/logo.png" alt="CarneShop" title="CarneShop">
 			</a>
 		</div>
@@ -99,7 +99,7 @@ if ($item != null && count($item) > 0) {
 	<div class="row">
 		<div class="col">
 			<p align="left">
-				<a href="lista_produtos.php"><button name='continuar'
+				<a href="index.php"><button name='continuar'
 						class='btn btn-outline-danger btn-lg' type='submit'>&lt Continuar
 						Comprando</button></a>
 			</p>
@@ -108,7 +108,7 @@ if ($item != null && count($item) > 0) {
 			<p align="right">
 				<a href="finalizarcompra.php">
 					<button name='finalizar' class='btn btn-danger btn-lg'>Finalizar
-						Compra &gt></button>
+						Compra &gt</button>
 				</a>
 			</p>
 

@@ -50,7 +50,7 @@ require 'btsinclude.html';
 	style="background-color: #8f5227";>
 	<div class="row">
 		<div class="col">
-			<a href="http://localhost/carneshop/lista_produtos.php"> <img
+			<a href="index.php"> <img
 				src="img/logo.png" alt="CarneShop" title="CarneShop">
 			</a>
 		</div>
