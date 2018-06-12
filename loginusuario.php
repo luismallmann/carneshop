@@ -6,27 +6,31 @@ if (isset($_POST) && isset($_POST["login"])) {
     $login = $_POST["login"];
     $senha = $_POST["senha"];
     if (validaLogin($login, $senha)) {
-        //iniciando uma sessão
+        // iniciando uma sessão
         session_start();
-        //grava um usuário na sessão
-        $_SESSION["login"] = $_POST["login"]; 
+        // grava um usuário na sessão
+        $_SESSION["login"] = $_POST["login"];
         
-        $codprod= $_GET["codprod"];
+        $codprod = $_GET["codprod"];
         $qntdped = $_GET["qntdped"];
-        //grava produto do pedido no banco
-      
+        // grava produto do pedido no banco
+        
         require 'dao/pedidodao.php';
         $cpfclnt = buscaCPF($login);
         
         $codped = cadastraPedidoNovo($cpfclnt);
         
-        if($codped != null){            
-             $_SESSION["codped"]=$codped;
-             cadastraPedido($codprod, $codped, $qntdped);
-             header("Location: carrinho.php");
+        if ($codped != null) {
+            $_SESSION["codped"] = $codped;
+            cadastraPedido($codprod, $codped, $qntdped);
+            
+            header("Location: carrinho.php");
         }
-        else  
+        
+      
+        else{
             echo "erro ao cadastrar";
+        }
     } else
         echo '<div class="alert alert-danger" role="alert">
 	    Email e/ou senha inválidos!
@@ -52,8 +56,7 @@ require 'btsinclude.html';
 		</div>
 		<div class="col-md-auto"></div>
 		<div class="col">
-			<img src="img/carne.png" alt="CarneShop" title="CarneShop">
-			</a>
+			<img src="img/carne.png" alt="CarneShop" title="CarneShop"> </a>
 		</div>
 	</div>
 </div>
@@ -82,10 +85,11 @@ require 'btsinclude.html';
 			<h3>Login na Conta</h3>
 			<form action="" method="post" name="frmLogin"
 				style="padding-bottom: 10px">
-				Email: <input type="text" name="login" class="form-control"	maxlength="40" required="required" placeholder="Email" autofocus="autofocus" />
-				<br/> 
-				Senha: <input type="password" name="senha" class="form-control" maxlength="20" placeholder="Senha" required="required" />
-				<br/>
+				Email: <input type="text" name="login" class="form-control"
+					maxlength="40" required="required" placeholder="Email"
+					autofocus="autofocus" /> <br /> Senha: <input type="password"
+					name="senha" class="form-control" maxlength="20"
+					placeholder="Senha" required="required" /> <br />
 				<button name="btnLogin" class="btn btn-primary" type="submit">Login</button>
 				&nbsp;
 			</form>

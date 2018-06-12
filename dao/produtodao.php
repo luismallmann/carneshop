@@ -71,7 +71,7 @@ function exclui(int $codigo)
     }
 
 }
-function buscaProduto()
+function buscaProduto($codprod)
 {
     global $conexao;
     
@@ -79,11 +79,13 @@ function buscaProduto()
         $comando = $conexao->prepare("select * from produto
          where codprod = ?"); // ordenação por padrão é ascendente
         $comando->execute([$codprod]);
-        return $produto;
+        
+        return $comando->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         return null;
     }
 }
+
 
 
 ?>

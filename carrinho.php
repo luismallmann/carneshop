@@ -2,12 +2,9 @@
 require 'dao/pedidodao.php';
 session_start();
 
-if (isset($_SESSION) && ($_SESSION["codped"]) && ($_SESSION["qntdped"])) {
+if (isset($_SESSION) && ($_SESSION["codped"])) {
     $codped = $_SESSION["codped"];
-    $qntped = $_SESSION["qntdped"];
- 
-}
-else 
+} else
     echo "erro";
 ?>
 <!DOCTYPE html>
@@ -37,56 +34,68 @@ require 'btsinclude.html';
 
 <style>
 table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+	border: 1px solid black;
+	border-collapse: collapse;
 }
+
 td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
 </style>
 
 </head>
 <body>
-<h1><font color="#8f5227"> Carrinho de Compras </font></h1>
-<div>
+	<h1>
+		<font color="#8f5227"> Carrinho de Compras </font>
+	</h1>
+	<div>
 <?php
-	    $item = listaProdutos($codpes);
-        if ($item != null && count($item) > 0) {
-        	echo "<div align='center'>";
-            echo "<table style='width:100%'>";
-            echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
-            echo "<th td colspan='2'>Nome do Produto</th><th>Quantidade</th><th>Valor por Kg(R$)</th><th>Valor Total(R$)</th>";
-            echo"<tr>";
-            foreach ($item as $produto) {
-                //aqui deve ser buscado os item confome codprod e quantidade armazenados no banco
-
-                echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
-	                echo "<td><img src='imgproduto/" . $produto["imgprod"]."'/></td>";
-                	echo "<td>". $produto['nomprod']."</td>";
-                	echo "<td>". $produto["desprod"] . "</td>";
-                   	echo "<td>".$produto["valprod"]."</td>";
-                   	echo "<td>".$produto["valprod"]."</td>";
-                echo "</tr>";
-            }
-            echo "</table>";
-            echo "</div>";
-        }
-        else {
-            echo "Não existem produtos cadastrados!";
-        }
+require 'dao/produtodao.php';
+$item = listaPedido_Produto($codped);
+if ($item != null && count($item) > 0) {
+    $soma = 0.0;
+    
+    echo "<div align='center'>";
+    echo "<table style='width:100%'>";
+    echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
+    echo "<th td colspan='2'>Nome do Produto</th><th>Quantidade</th><th>Valor por Kg(R$)</th><th>Valor Total(R$)</th>";
+    
+    foreach ($item as $detalhaItem) {
         
+        echo "<tr>";
+        // trata as informacoes do pedido
+        $codprod = $detalhaItem["produtocodprod"];
+        $qnt = $detalhaItem["qntped"];
+        // busca as informcoes do produto
         
-        //necessario ajustar a parte php
-        ?>
+        $infoProduto = buscaProduto($codprod);
+        $valorItem = 0.0;
+        $valorItem = $infoProduto["valprod"] * $qnt;
+        $soma += $valorItem;
+        
+        echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
+        echo "<td><img src='imgproduto/" . $infoProduto["imgprod"] . "'/></td>";
+        echo "<td>" . $infoProduto['nomprod'] . "</td>";
+        echo "<td>" . $qnt . "</td>";
+        echo "<td>" . $infoProduto["valprod"] . "</td>";
+        echo "<td>" . $valorItem . "</td>";
+        echo "</tr>";
+    }
+    echo "<tr style='text-align: center; padding: 0px 0px 0px;; font-size: 25px; font-family: Impact, fantasy;'>";
+    echo "<th td colspan='4'<p style='text-align:right;'>Total</th><th>R$ " . $soma . "</th>";
+    echo "</table>";
+    echo "</div>";
+    
+    $_SESSION['valorTotal'] = $soma;
+} else {
+    echo "Não existem produtos cadastrados!";
+}
 
-
-
-
-
+// necessario ajustar a parte php
+?>
 </div>
-
-
 	<div class="row">
 		<div class="col">
 			<p align="left">
@@ -96,19 +105,15 @@ td, th {
 			</p>
 		</div>
 		<div class="col">
-			<form action='' method='post' name='frmAdicionar' class="form">
-				<p align="right">
-					<a href="#">
-						<button name='finalizar' class='btn btn-danger btn-lg'
-							type='submit'>Finalizar Compra &gt></button>
-					</a>
-				</p>
-			</form>
+			<p align="right">
+				<a href="finalizarcompra.php">
+					<button name='finalizar' class='btn btn-danger btn-lg'>Finalizar
+						Compra &gt></button>
+				</a>
+			</p>
+
 		</div>
 	</div>
-
-
-
 </body>
 </html>
 

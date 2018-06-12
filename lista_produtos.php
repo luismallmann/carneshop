@@ -84,26 +84,26 @@ require 'btsinclude.html';
         if ($produto != null && count($produto) > 0) {
         	echo "<div align='center'>";
             echo "<table>";
-            foreach ($produto as $buscaProduto) {
+            foreach ($produto as $cat) {
                 echo "<tr>";
 	                echo "<td>";
-    		            echo "<img src='imgproduto/" . $buscaProduto["imgprod"]."'/>";
+    		            echo "<img src='imgproduto/" . $cat["imgprod"]."'/>";
             	    echo "</td>";
                 	echo "<td>";
-                		echo "<p style='text-align: center; padding: 10px 0px 0px; color: #B22222; font-size: 30px; font-family: Impact, fantasy;'>" . $buscaProduto['nomprod'] . "</p>";
+                		echo "<p style='text-align: center; padding: 10px 0px 0px; color: #B22222; font-size: 30px; font-family: Impact, fantasy;'>" . $cat['nomprod'] . "</p>";
                 		
-                		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>" . $buscaProduto["desprod"] . "</p>";
+                		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>" . $cat["desprod"] . "</p>";
                 		
-                		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>Preço por kg: R$ "  . $buscaProduto["valprod"] . "</p>";
+                		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>Preço por kg: R$ "  . $cat["valprod"] . "</p>";
                 		
 
-                		echo "<form style='padding: 10px' action='' method='post' name='frmAdicionar".$buscaProduto["codprod"]."'>
+                		echo "<form style='padding: 10px' action='' method='post' name='frmAdicionar".$cat["codprod"]."'>
 									<div class='input-group mb-1'>
 										<div class='input-group-prepend'>
 											<div class='input-group-text'>+/-</div>
 										</div>
                                         <input type='hidden' name='codprod' class='form-control'
-											id='cod' value='".$buscaProduto["codprod"]."'>            
+											id='cod' value='".$cat["codprod"]."'>            
 										<input type='number' name='qntdped' class='form-control'
 											id='quantidade' value='' min='1'>
 									</div>

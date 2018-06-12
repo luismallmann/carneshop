@@ -53,13 +53,13 @@ function atualizaPedido($codped, $codprod, $qntdped)
         // echo $e->getMessage();
     }
 }
-function listaProdutos($codpes)
+function listaPedido_Produto($codped)
 {
     global $conexao;
     
     try {
         $comando = $conexao->prepare("select * from pedido_produto where pedidocodped = ? order by itempedidoprod"); // ordenação por padrão é ascendente
-        $comando->execute([$codpes]);
+        $comando->execute([$codped]);
         // verificamos se foram retornados registros
         if ($comando->rowCount() > 0) {
             $i = 0;
