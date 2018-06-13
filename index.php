@@ -156,8 +156,6 @@ if (isset($_POST) && isset($_POST["qntdped"])) {
             'codprod' => $codprod,
             'qntdped' => $qntdped
         ));
-        
-        session_start();
         if (isset($_SESSION["login"])) {
             $login = $_SESSION["login"];
             $codped = $_SESSION["codped"];
