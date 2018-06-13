@@ -81,11 +81,29 @@
         return $retorno['cpfclnt'];
     }
     function buscaDadosPessoais($cpf){
+        /*
+         * busca usuario pelo cpf
+         */
         global $conexao; // acessa a variável conexão
         // consulta - select
         $comando = $conexao->prepare('select * from cliente where cpfclnt = ?');
         // executa a consulta
         $comando->execute([$cpf]);
+        // descarregar o resultado
+        $retorno = $comando->fetch(PDO::FETCH_ASSOC);
+        // retorno é um array associativo
+        
+        return $retorno;
+    }
+    function buscaDadosPessoaisLogin($login){
+        /*
+         * busca usario pelo login
+         */
+        global $conexao; // acessa a variável conexão
+        // consulta - select
+        $comando = $conexao->prepare('select * from cliente where emlclnt = ?');
+        // executa a consulta
+        $comando->execute([$login]);
         // descarregar o resultado
         $retorno = $comando->fetch(PDO::FETCH_ASSOC);
         // retorno é um array associativo

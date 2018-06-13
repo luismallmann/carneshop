@@ -5,6 +5,8 @@ if (isset($_POST) && isset($_POST["login"])) {
     // podemos utilizar a função header + location
     $login = $_POST["login"];
     $senha = $_POST["senha"];
+    
+    echo $qntdped;
     if (validaLogin($login, $senha)) {
         // iniciando uma sessão
         session_start();
