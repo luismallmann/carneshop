@@ -97,7 +97,7 @@ echo "<h4><br>Dados Pessoais</h4>
 <header>
 <p><b>CPF:</b> " . $cpfFormatado . "
 <br><b>Nome:</b> " . $cliente['nomclnt'] . "
-<br><b>Endereço:</b> " . $endereco . "
+<br><b>Endereço de Entrega:</b> " . $endereco . "
 <br><b>Cidade:</b>: " . $cidadeUF . "
 <br><b>Telefone:</b> " . $telefone . "
 </p></header>";

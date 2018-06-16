@@ -10,7 +10,7 @@ function cadastraVenda($valorTotal, $codped)
         $comando = $conexao->prepare('INSERT INTO VENDA(VALVENDA, STSVENDA,DATVENDA, HORVENDA, PEDIDOCODPED) VALUES(?,?,CURRENT_DATE,CURRENT_TIME,?)');
         
         $comando->execute(array(
-            $valorTotal,"PENDENTE DE ENTREGA",
+            $valorTotal,"PEDIDO CONFIRMADO",
             $codped));
         return true;
     } catch (PDOException $e) {
@@ -38,6 +38,35 @@ function listaVendas()
         return $venda;
     } catch (PDOException $e) {
         return null;
+    }
+}
+function buscaVenda($codvenda)
+{
+    global $conexao;
+    
+    try {
+        $comando = $conexao->prepare("select V.*, P.* from VENDA V INNER JOIN PEDIDO P ON V.PEDIDOCODPED = P.CODPED WHERE V.CODVENDA = ?;"); // ordenação por padrão é ascendente
+        $comando->execute([$codvenda]);
+        
+        return $comando->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return null;
+    }
+    
+}
+function alteraStatus($codvenda, $status)
+{
+    global $conexao; // acessa a variável conexão
+    try {
+        
+        // insere os dados na tabela endereco_cliente
+        $comando = $conexao->prepare('UPDATE VENDA SET STSVENDA = ? WHERE CODVENDA = ?;');
+        
+        $comando->execute(array($status,$codvenda));
+        return true;
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        // echo $e->getMessage();
     }
 }
 

@@ -3,7 +3,6 @@
 require_once 'btsinclude.html';
 require_once 'dao/clientedao.php';
 
-echo $_POST["sexo"];
 if (isset($_POST) && isset($_POST["nome"]) && isset($_POST["sexo"]) && isset($_POST["cpf"]) 
     && isset($_POST["datanas"]) && isset($_POST["email"]) && isset($_POST["senha"]) && 
     isset($_POST["dddObg"]) && isset($_POST["telefoneObg"]) && isset($_POST["cidade"]) && isset($_POST["estado"]) && isset($_POST["CEP"]) && isset($_POST["rua"])   && isset($_POST["numEnd"]) && isset($_POST["bairro"])) {
