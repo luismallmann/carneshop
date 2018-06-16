@@ -152,8 +152,8 @@
         global $conexao;
         
         try {
-            $comando = $conexao->prepare("select * from cliente
-        order by nomclnt"); // ordenação por padrão é ascendente
+            $comando = $conexao->prepare("SELECT C.CPFCLNT, C.EMLCLNT, C.NOMCLNT, E.CIDENDCLNT, 
+        E.ESTENDCLNT FROM CLIENTE C INNER JOIN  ENDERECO_CLIENTE E ON C.CPFCLNT = E.CLIENTECPFCLNT;"); // ordenação por padrão é ascendente
             $comando->execute();
             // verificamos se foram retornados registros
             if ($comando->rowCount() > 0) {

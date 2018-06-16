@@ -14,21 +14,27 @@ require 'btsinclude.html';
 <!--constroi o topo-->
 </head>
 <body>	
-<h3>Relatório de Vendas</h3>
+<h3>Clientes Cadastados</h3>
     <?php
     $cliente = listaClientes();
     if ($cliente != null && count($cliente) > 0) {       
         echo "<div align='center'>";
-        echo "<table style='width:100%'>";
-        echo "<th>CPF</th><th>Nome</th><th>Sexo)</th><th>Email</th><th>Hora</th>";
-        
+        echo "<table style='width:80%'>";
+        echo "<th>CPF</th><th>Nome</th><th>Email</th><th>Cidade</th>";
         foreach ($cliente as $detalhaCliente) {
+            //formata o cpf para exibicao
+            $cpfFormatado = str_pad($detalhaCliente['cpfclnt'], 11, '0', STR_PAD_LEFT);
+            // primeiro ponto
+            $cpfFormatado = substr_replace($cpfFormatado, ".", 3, 0);
+            // segundo ponto
+            $cpfFormatado = substr_replace($cpfFormatado, ".", 7, 0);
+            // hifen
+            $cpfFormatado = substr_replace($cpfFormatado, "-", 11, 0);            
             echo "<tr>";         
-            echo "<td>" . $$detalhaCliente['cpfclnt'] . "</td>";
-            echo "<td>" . $$detalhaCliente['nomclnt'] . "</td>";
-            echo "<td>" . $$detalhaCliente['sexclnt'] . "</td>";
-            echo "<td>" . $$detalhaCliente['emlclnt'] . "</td>";
-            echo "<td>" . $$detalhaCliente['nomclnt'] . "</td>";
+            echo "<td>" . $cpfFormatado . "</td>";
+            echo "<td>" . $detalhaCliente['nomclnt'] . "</td>";
+            echo "<td>" . $detalhaCliente['emlclnt'] . "</td>";
+            echo "<td>" . $detalhaCliente['cidendclnt'] . " - " . $detalhaCliente['estendclnt']."</td>";
             echo "</tr>";
         }
         echo "<tr style='text-align: center; padding: 0px 0px 0px;; font-size: 25px; font-family: Impact, fantasy;'>";
