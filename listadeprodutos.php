@@ -1,6 +1,6 @@
 <?php
 
-require 'dao/produtodao.php';
+require_once 'dao/produtodao.php';
 
 if (isset($_POST) && isset($_POST["produtoX"])) {
     $produtoX = $_POST["produtoX"];

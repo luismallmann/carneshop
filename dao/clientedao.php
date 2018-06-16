@@ -20,18 +20,19 @@
         
         $usuario['cpf'] = str_replace("-", "", $usuario['cpf']);
         $usuario['cpf'] = str_replace(".", "", $usuario['cpf']);
-        $usuario['telefone'] = str_replace("-", "", $usuario['telefone']);
+        $usuario['telefoneObg'] = str_replace("-", "", $usuario['telefoneObg']);
         $usuario['CEP'] = str_replace("-", "", $usuario['CEP']);
         
         global $conexao; // acessa a variável conexão
         try {
             //insere os dados na tabela cliente
-            $comando = $conexao->prepare('INSERT INTO CLIENTE(CPFCLNT, NOMCLNT, NASCLNT,
-         EMLCLNT, SENCLNT) VALUES(?,?,?,?,md5(?))');
+            $comando = $conexao->prepare('INSERT INTO CLIENTE(CPFCLNT, NOMCLNT, SEXCLNT, NASCLNT,
+         EMLCLNT, SENCLNT) VALUES(?,?,?,?,?,md5(?))');
             
             $comando->execute([
                 $usuario['cpf'],
                 $usuario['nome'],
+                $usuario['sexo'],
                 $usuario['datanas'],
                 $usuario['email'],
                 $usuario['senha']
@@ -58,9 +59,21 @@
             
             $comando->execute([
                 $usuario['cpf'],
-                $usuario['ddd'],
-                $usuario['telefone'],
+                $usuario['dddObg'],
+                $usuario['telefoneObg']
             ]);
+            
+            if(isset($usuario['dddOpc']) && isset($usuario['telefoneOpc'])){
+                $usuario['telefoneOpc'] = str_replace("-", "", $usuario['telefoneOpc']);
+                //insere os dados na tabela telefone_cliente
+                $comando = $conexao->prepare('INSERT INTO TELEFONE_CLIENTE(CLIENTECPFCLNT, DDDTELCLNT, NUMTELCLNT) VALUES(?,?,?)');
+                
+                $comando->execute([
+                    $usuario['cpf'],
+                    $usuario['dddOpc'],
+                    $usuario['telefoneOpc']
+                ]);
+            }
             return true;
         } catch (PDOException $e) {
             return $e;

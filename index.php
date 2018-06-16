@@ -9,32 +9,31 @@ if (isset($_SESSION['login'])) {
     
     $logado = true;
 }
-
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>CarneShop</title>
-<!-- chama o arquivo que contem as informacoes do boot strap -->
-<?php
-    require 'btsinclude.html';
-    ?>
 <!--constroi o topo-->
 <div id="box-topo" class="container-1230"
 	style="background-color: #8f5227";>
 	<div class="row">
 		<div class="col">
-			<a href="index.php"> <img src="img/logo.png" alt="CarneShop"
-				title="CarneShop">
+			<a href="index.php"> <img
+				src="img/logo.png" alt="CarneShop" title="CarneShop">
 			</a>
 		</div>
 		<div class="col-md-auto"></div>
 		<div class="col">
-			<img src="img/carne.png" alt="CarneShop" title="CarneShop"></a>
+			<img src="img/carne.png" alt="CarneShop" title="CarneShop"> </a>
 		</div>
 	</div>
 </div>
+<title>CarneShop</title>
+<!-- chama o arquivo que contem as informacoes do boot strap -->
+<?php
+    require 'btsinclude.html';
+    ?>
 <style type="text/css">
 .window {
 	display: none;

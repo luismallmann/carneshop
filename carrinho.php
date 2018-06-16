@@ -53,8 +53,8 @@ td, th {
 	<div>
 <?php
 require 'dao/produtodao.php';
-$item = listaPedido_Produto($codped);
-if ($item != null && count($item) > 0) {
+$venda = listaPedido_Produto($codped);
+if ($venda != null && count($venda) > 0) {
     $soma = 0.0;
     
     echo "<div align='center'>";
@@ -62,7 +62,7 @@ if ($item != null && count($item) > 0) {
     echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
     echo "<th td colspan='2'>Nome do Produto</th><th>Quantidade</th><th>Valor por Kg(R$)</th><th>Valor Total(R$)</th>";
     
-    foreach ($item as $detalhaItem) {
+    foreach ($venda as $detalhaItem) {
         
         echo "<tr>";
         // trata as informacoes do pedido

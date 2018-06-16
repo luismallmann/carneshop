@@ -18,4 +18,27 @@ function cadastraVenda($valorTotal, $codped)
         // echo $e->getMessage();
     }
 }
+function listaVendas()
+{
+    global $conexao;
+    
+    try {
+        $comando = $conexao->prepare("select * from venda
+        order by codvenda"); // ordenação por padrão é ascendente
+        $comando->execute();
+        // verificamos se foram retornados registros
+        if ($comando->rowCount() > 0) {
+            $i = 0;
+            // descarrega um registro por vez
+            while ($reg = $comando->fetch(PDO::FETCH_ASSOC)) {
+                // registro é armazenado no vetor categoria
+                $venda[$i++] = $reg;
+            }
+        }
+        return $venda;
+    } catch (PDOException $e) {
+        return null;
+    }
+}
+
 ?>

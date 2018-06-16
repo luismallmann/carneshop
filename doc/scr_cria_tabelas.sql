@@ -1,15 +1,16 @@
 CREATE TABLE cliente (
-  cpfclnt numeric(11, 0) NOT NULL UNIQUE, 
+  cpfclnt numeric(11, 0) NOT NULL, 
   emlclnt varchar(40) NOT NULL UNIQUE, 
   nomclnt varchar(40) NOT NULL, 
+  sexclnt char(1) NOT NULL, 
   nasclnt date NOT NULL, 
   senclnt varchar(32) NOT NULL, 
-  PRIMARY KEY (cpfclnt, 
-  emlclnt));
+  PRIMARY KEY (cpfclnt));
 COMMENT ON TABLE cliente IS 'Tabela que contém os dados pessoais de cada cliente.';
 COMMENT ON COLUMN cliente.cpfclnt IS 'CPF do Cliente';
 COMMENT ON COLUMN cliente.emlclnt IS 'Email do Cliete';
 COMMENT ON COLUMN cliente.nomclnt IS 'Nome do Cliente';
+COMMENT ON COLUMN cliente.sexclnt IS 'sexo do cliente';
 COMMENT ON COLUMN cliente.nasclnt IS 'Data de Nascimento do Cliente';
 CREATE TABLE endereco_cliente (
   codendclnt     SERIAL NOT NULL, 
@@ -21,7 +22,6 @@ CREATE TABLE endereco_cliente (
   baiendclnt     varchar(20) NOT NULL, 
   cmpendclnt     varchar(20), 
   clientecpfclnt numeric(11, 0) NOT NULL, 
-  clienteemlclnt varchar(40), 
   PRIMARY KEY (codendclnt));
 COMMENT ON TABLE endereco_cliente IS 'Enderecos do cliente. Pode haver mais de um';
 COMMENT ON COLUMN endereco_cliente.codendclnt IS 'codigo do endereco do cliente. é gerado automaticamente de forma sequencial.';
@@ -77,7 +77,6 @@ CREATE TABLE telefone_cliente (
   dddtelclnt     numeric(2, 0) NOT NULL, 
   numtelclnt     numeric(9, 0) NOT NULL, 
   clientecpfclnt numeric(11, 0) NOT NULL, 
-  clienteemlclnt varchar(40), 
   PRIMARY KEY (codtelclnt));
 COMMENT ON COLUMN telefone_cliente.codtelclnt IS 'codigo do telefone do cliente. gerado automaticamente de forma sequencial';
 COMMENT ON COLUMN telefone_cliente.dddtelclnt IS 'DDD do telefone do cliente.';
@@ -99,6 +98,6 @@ COMMENT ON COLUMN venda.horvenda IS 'horario da venda';
 ALTER TABLE pedido_produto ADD CONSTRAINT FKpedido_pro231850 FOREIGN KEY (produtocodprod) REFERENCES produto (codprod);
 ALTER TABLE pedido_produto ADD CONSTRAINT FKpedido_pro330558 FOREIGN KEY (pedidocodped) REFERENCES pedido (codped);
 ALTER TABLE venda ADD CONSTRAINT FKvenda21377 FOREIGN KEY (pedidocodped) REFERENCES pedido (codped);
-ALTER TABLE pedido ADD CONSTRAINT FKpedido906063 FOREIGN KEY (clientecpfclnt, clienteemlclnt) REFERENCES cliente (cpfclnt, emlclnt);
-ALTER TABLE telefone_cliente ADD CONSTRAINT FKtelefone_c644721 FOREIGN KEY (clientecpfclnt, clienteemlclnt) REFERENCES cliente (cpfclnt, emlclnt);
-ALTER TABLE endereco_cliente ADD CONSTRAINT FKendereco_c358903 FOREIGN KEY (clientecpfclnt, clienteemlclnt) REFERENCES cliente (cpfclnt, emlclnt);
+ALTER TABLE pedido ADD CONSTRAINT FKpedido77747 FOREIGN KEY (clientecpfclnt) REFERENCES cliente (cpfclnt);
+ALTER TABLE telefone_cliente ADD CONSTRAINT FKtelefone_c632501 FOREIGN KEY (clientecpfclnt) REFERENCES cliente (cpfclnt);
+ALTER TABLE endereco_cliente ADD CONSTRAINT FKendereco_c624907 FOREIGN KEY (clientecpfclnt) REFERENCES cliente (cpfclnt);
