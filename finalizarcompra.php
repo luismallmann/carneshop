@@ -1,7 +1,7 @@
 <?php
 // busca informacoes no banco
-require 'dao/pedidodao.php';
-require 'dao/clientedao.php';
+require_once 'dao/pedidodao.php';
+require_once 'dao/clientedao.php';
 session_start();
 if (isset($_SESSION) && ($_SESSION["codped"])) {
     // busca informacoes na SESSION
@@ -37,7 +37,7 @@ if (isset($_SESSION) && ($_SESSION["codped"])) {
 if (isset($_POST)) {
     if (isset($_POST["comprar"])) {
         // grava informacoes no banco
-        require 'dao/vendadao.php';
+        require_once 'dao/vendadao.php';
         cadastraVenda($valorTotal, $codped);
         header("Location: sucesso.php");
     } else if (isset($_POST['cancelar'])) {

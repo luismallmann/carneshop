@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST) && isset($_POST["login"])) {
-    require 'dao/clientedao.php';
+    require_once 'dao/clientedao.php';
     // envia para a página principal
     // podemos utilizar a função header + location
     $login = $_POST["login"];
@@ -17,7 +17,7 @@ if (isset($_POST) && isset($_POST["login"])) {
         $qntdped = $_GET["qntdped"];
         // grava produto do pedido no banco
         
-        require 'dao/pedidodao.php';
+        require_once 'dao/pedidodao.php';
         $cpfclnt = buscaCPF($login);
         
         $codped = cadastraPedidoNovo($cpfclnt);
@@ -45,7 +45,7 @@ if (isset($_POST) && isset($_POST["login"])) {
 <meta charset="UTF-8">
 <!-- chama o topo/cabeçalho e o bootstrap -->
 <?php
-require 'btsinclude.html';
+require_once 'btsinclude.html';
 ?>
 <!--constroi o topo-->
 <div id="box-topo" class="container-1230"

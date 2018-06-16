@@ -1,5 +1,5 @@
 ﻿<?php
-require 'db/conexao.php';
+require_once 'db/conexao.php';
 
 function cadastraProduto($produto, $caminho_imagem)
 /*

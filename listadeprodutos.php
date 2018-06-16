@@ -15,7 +15,7 @@ if (isset($_POST) && isset($_POST["produtoX"])) {
 <title>CarneShop</title>
 <!-- chama o arquivo que contem as informacoes do boot strap -->
 <?php
-require 'btsinclude.html';
+require_once 'btsinclude.html';
 ?>
 <!--constroi o topo-->
 </head>

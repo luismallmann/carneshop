@@ -1,5 +1,5 @@
 <?php
-require 'db/conexao.php';
+require_once 'db/conexao.php';
 
 // função pra validar o login
 function validaLogin($login, $senha)

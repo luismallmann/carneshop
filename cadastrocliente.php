@@ -1,7 +1,7 @@
 <!-- chama o topo/cabeçalho e o bootstrap -->
 	<?php
-require 'btsinclude.html';
-require 'dao/clientedao.php';
+require_once 'btsinclude.html';
+require_once 'dao/clientedao.php';
 
 echo $_POST["sexo"];
 if (isset($_POST) && isset($_POST["nome"]) && isset($_POST["sexo"]) && isset($_POST["cpf"]) 

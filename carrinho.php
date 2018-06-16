@@ -1,5 +1,5 @@
 <?php
-require 'dao/pedidodao.php';
+require_once 'dao/pedidodao.php';
 session_start();
 
 if (isset($_SESSION) && ($_SESSION["codped"])) {
@@ -52,7 +52,7 @@ td, th {
 	</h1>
 	<div>
 <?php
-require 'dao/produtodao.php';
+require_once 'dao/produtodao.php';
 $venda = listaPedido_Produto($codped);
 if ($venda != null && count($venda) > 0) {
     $soma = 0.0;

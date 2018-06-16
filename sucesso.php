@@ -1,5 +1,5 @@
 <?php
-require 'dao/clientedao.php';
+require_once 'dao/clientedao.php';
 session_start();
 if (isset($_SESSION) && ($_SESSION["codped"])) {
     // busca informacoes na SESSION
@@ -20,7 +20,7 @@ if (isset($_SESSION) && ($_SESSION["codped"])) {
 <title>CarneShop</title>
 <!-- chama o arquivo que contem as informacoes do boot strap -->
 <?php
-require 'btsinclude.html';
+require_once 'btsinclude.html';
 ?>
 <!--constroi o topo-->
 <div id="box-topo" class="container-1230"

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <!-- chama o topo/cabeçalho e o bootstrap -->
 	<?php
-require 'btsinclude.html';
+require_once 'btsinclude.html';
 ?>
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"

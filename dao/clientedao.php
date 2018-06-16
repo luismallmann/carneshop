@@ -147,4 +147,27 @@
         
         return $retorno;
     }
-?>
+    function listaClientes()
+    {
+        global $conexao;
+        
+        try {
+            $comando = $conexao->prepare("select * from cliente
+        order by nomclnt"); // ordenação por padrão é ascendente
+            $comando->execute();
+            // verificamos se foram retornados registros
+            if ($comando->rowCount() > 0) {
+                $i = 0;
+                // descarrega um registro por vez
+                while ($reg = $comando->fetch(PDO::FETCH_ASSOC)) {
+                    // registro é armazenado no vetor categoria
+                    $cliente[$i++] = $reg;
+                }
+            }
+            return $cliente;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+    
+    ?>

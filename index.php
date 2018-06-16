@@ -1,9 +1,9 @@
 <?php
-require 'dao/produtodao.php';
+require_once 'dao/produtodao.php';
 session_start();
 $logado = false;
 if (isset($_SESSION['login'])) {
-    require 'dao/clientedao.php';
+    require_once 'dao/clientedao.php';
     
     $usuario = buscaDadosPessoaisLogin($_SESSION['login']);
     
@@ -32,7 +32,7 @@ if (isset($_SESSION['login'])) {
 <title>CarneShop</title>
 <!-- chama o arquivo que contem as informacoes do boot strap -->
 <?php
-    require 'btsinclude.html';
+    require_once 'btsinclude.html';
     ?>
 <style type="text/css">
 .window {
@@ -158,7 +158,7 @@ if (isset($_POST) && isset($_POST["qntdped"])) {
         if (isset($_SESSION["login"])) {
             $login = $_SESSION["login"];
             $codped = $_SESSION["codped"];
-            require 'dao/pedidodao.php';
+            require_once 'dao/pedidodao.php';
             atualizaPedido($codped, $codprod, $qntdped);
             
             header("Location: carrinho.php");
