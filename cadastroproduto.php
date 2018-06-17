@@ -84,7 +84,7 @@ require_once 'btsinclude.html';
 </body>
 </html>
 <?php
-require_once  'dao/produtodao.php';
+require_once 'dao/produtodao.php';
 if (! empty($_FILES['imagem'])) {
     $imagem = $_FILES['imagem'];
     $teste = true;
@@ -94,28 +94,33 @@ if (! empty($_FILES['imagem'])) {
     // Pega as dimensões da imagem
     $dimensoes = getimagesize($imagem["tmp_name"]);
     
-    // Verifica se a largura da imagem é maior que a largura permitida
-    if ($dimensoes[0] > 260 || ($dimensoes[1] > 260)) {
-        echo '<script> alert("Tamanho da imagem não deve ultrapassar 260px X 260px. Tamanho Atual: ' . $dimensoes[0] . 'px X ' . $dimensoes[1] . 'px");</script>';
+    if ($dimensoes == null) {
+        $nome_imagem = "noimage.png";
+    } else {
+        // Verifica se a largura da imagem é maior que a largura permitida
+        if ($dimensoes[0] > 260 || ($dimensoes[1] > 260)) {
+            echo '<script> alert("Tamanho da imagem não deve ultrapassar 260px X 260px. Tamanho Atual: ' . $dimensoes[0] . 'px X ' . $dimensoes[1] . 'px");</script>';
+            
+            $teste = false;
+        }
         
-        $teste = false;
-    }
-    
-    if ($teste == true) {
-        
-        // Gera um nome único para a imagem
-        $nome_imagem = md5(uniqid(time())) . "." . $ext[1];
-        
-        // Caminho de onde ficará a imagem
-        $caminho_imagem = "imgproduto/" . $nome_imagem;
-        
-        // Faz o upload da imagem para seu respectivo caminho
-        move_uploaded_file($imagem["tmp_name"], $caminho_imagem);
+        if ($teste == true) {
+            
+            // Gera um nome único para a imagem
+            $nome_imagem = md5(uniqid(time())) . "." . $ext[1];
+            
+            // Caminho de onde ficará a imagem
+            $caminho_imagem = "imgproduto/" . $nome_imagem;
+            
+            // Faz o upload da imagem para seu respectivo caminho
+            move_uploaded_file($imagem["tmp_name"], $caminho_imagem);
+        }
     }
 }
 
 if (isset($_POST) && isset($_POST['nome']) && isset($_POST['estoque']) && isset($_POST['preco'])) {
     cadastraProduto($_POST, $nome_imagem);
+    echo $nome_imagem;
 }
 
 ?>

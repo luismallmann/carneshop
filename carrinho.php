@@ -61,20 +61,35 @@ if ($venda != null && count($venda) > 0) {
     echo "<table style='width:100%'>";
     echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
     echo "<th td colspan='2'>Nome do Produto</th><th>Quantidade</th><th>Valor por Kg(R$)</th><th>Valor Total(R$)</th>";
+    $i=0;
+    $produtosPedido=null;
     
     foreach ($venda as $detalhaItem) {
+    
         
-        echo "<tr>";
         // trata as informacoes do pedido
         $codprod = $detalhaItem["produtocodprod"];
         $qnt = $detalhaItem["qntped"];
+     
+      /*
+        if(in_array($codprod, $produtosPedido) == false){
+            $produtosPedido[$i]=$codprod;
+            $qntTotal[$codprod]=$qnt;
+            $i++;
+        }
+        else{
+            $qntTotal[$codprod]=$qntTotal[$codprod] + $qnt;
+        }
+ 
+        print_r($qntTotal);
+        */
         // busca as informcoes do produto
-        
         $infoProduto = buscaProduto($codprod);
         $valorItem = 0.0;
         $valorItem = $infoProduto["valprod"] * $qnt;
         $soma += $valorItem;
         
+        echo "<tr>";
         echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
         echo "<td><img src='imgproduto/" . $infoProduto["imgprod"] . "'/></td>";
         echo "<td>" . $infoProduto['nomprod'] . "</td>";

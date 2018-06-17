@@ -24,9 +24,11 @@ if (isset($_POST) && isset($_POST["login"])) {
         
         if ($codped != null) {
             $_SESSION["codped"] = $codped;
-            cadastraPedido($codprod, $codped, $qntdped);
-            
-            header("Location: carrinho.php");
+            if(cadastraPedido($codprod, $codped, $qntdped) == true){
+             header("Location: carrinho.php");
+            }else{
+                echo "<script> alert('Quantidade superior ao estoque disponível')</script>";
+            }
         }
         
       

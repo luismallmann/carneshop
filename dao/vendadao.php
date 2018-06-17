@@ -10,9 +10,9 @@ function cadastraVenda($valorTotal, $codped)
         $comando = $conexao->prepare('INSERT INTO VENDA(VALVENDA, STSVENDA,DATVENDA, HORVENDA, PEDIDOCODPED) VALUES(?,?,CURRENT_DATE,CURRENT_TIME,?)');
         
         $comando->execute(array(
-            $valorTotal,"PEDIDO CONFIRMADO",
+            $valorTotal,"PEDIDO RECEBIDO",
             $codped));
-        return true;
+        return $conexao->lastInsertId();
     } catch (PDOException $e) {
         echo $e->getMessage();
         // echo $e->getMessage();

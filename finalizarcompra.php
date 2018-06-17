@@ -38,8 +38,11 @@ if (isset($_POST)) {
     if (isset($_POST["comprar"])) {
         // grava informacoes no banco
         require_once 'dao/vendadao.php';
-        cadastraVenda($valorTotal, $codped);
-        header("Location: sucesso.php");
+        $codvenda = cadastraVenda($valorTotal, $codped);
+        if ($codvenda != NULL) {
+            atualizaQuantidadeFinal($codvenda);
+            header("Location: sucesso.php");
+        }
     } else if (isset($_POST['cancelar'])) {
         header("Location: index.php");
         session_destroy();
