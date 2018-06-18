@@ -134,8 +134,8 @@ function atualizaQuantidadeFinal($codvenda)
             
             $produto = $comando->fetch(PDO::FETCH_ASSOC);
             
-            $qntAtual = $produto['estprod'];
-            $qntNova = $qntAtual - $produto['produtocodprod'];
+            $qntAtual = buscaQuantidade($detalhaPedido['produtocodprod']);
+            $qntNova = $qntAtual - $produto['qntped'];
             
             $comando = $conexao->prepare("UPDATE PRODUTO SET ESTPROD = ? WHERE CODPROD = ?;"); // ordenação por padrão é ascendente
             $comando->execute(array(

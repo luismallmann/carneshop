@@ -71,19 +71,6 @@ if ($venda != null && count($venda) > 0) {
         $codprod = $detalhaItem["produtocodprod"];
         $qnt = $detalhaItem["qntped"];
      
-      /*
-        if(in_array($codprod, $produtosPedido) == false){
-            $produtosPedido[$i]=$codprod;
-            $qntTotal[$codprod]=$qnt;
-            $i++;
-        }
-        else{
-            $qntTotal[$codprod]=$qntTotal[$codprod] + $qnt;
-        }
- 
-        print_r($qntTotal);
-        */
-        // busca as informcoes do produto
         $infoProduto = buscaProduto($codprod);
         $valorItem = 0.0;
         $valorItem = $infoProduto["valprod"] * $qnt;

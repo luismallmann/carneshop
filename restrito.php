@@ -40,7 +40,7 @@ require_once 'btsinclude.html';
   <div class="tab-pane fade" id="pills-vendas" role="tabpanel" aria-labelledby="pills-vendas"><?php include "vendas.php"; ?></div>
   <div class="tab-pane fade" id="pills-estoque" role="tabpanel" aria-labelledby="pills-estoque-tab"><?php include_once "listadeprodutos.php"; ?></div>
   <div class="tab-pane fade" id="pills-funcionario" role="tabpanel" aria-labelledby="pills-funcionario-tab"><?php include "cadastro_funcionario_formulario.php"; ?></div>
-	<div class="tab-pane fade" id="pills-relatorios" role="tabpanel" aria-labelledby="pills-relatorios-tab">FALTA FAZER</div>
+	<div class="tab-pane fade" id="pills-relatorios" role="tabpanel" aria-labelledby="pills-relatorios-tab"><?php include "relatorios.php"; ?></div>
 </div>
 </body>
 </html>
