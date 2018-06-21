@@ -10,7 +10,7 @@ if (isset($_SESSION) && ($_SESSION["codped"])) {
     // busca dados pessoais
     $cliente = buscaDadosPessoais($cpf);
 } else
-    echo "erro";
+    header("Location: index.php");
 
 ?>
 <!DOCTYPE html>

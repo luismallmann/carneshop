@@ -1,11 +1,10 @@
 <?php
 require_once 'dao/pedidodao.php';
 session_start();
-
 if (isset($_SESSION) && ($_SESSION["codped"])) {
     $codped = $_SESSION["codped"];
 } else
-    echo "erro";
+    header("Location: index.php");
 ?>
 <!DOCTYPE html>
 <html>

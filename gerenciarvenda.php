@@ -1,4 +1,9 @@
 <?php
+//se está vazio na está logado, entoa requer login
+if (empty($_SESSION['usuario'])){
+    header("Location: loginfuncionario.php");
+}
+else{
 // busca informacoes no banco
 require_once 'dao/vendadao.php';
 require_once 'dao/pedidodao.php';
@@ -32,6 +37,7 @@ if (isset($_GET) && ($_GET["codvenda"])) {
     $cpfFormatado = substr_replace($cpfFormatado, "-", 11, 0);
 } else
     echo "erro";
+}
 ?>
 <!DOCTYPE html>
 <html>

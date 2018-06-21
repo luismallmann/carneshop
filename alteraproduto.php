@@ -85,7 +85,7 @@ require_once ''; 'dao/produtodao.php';
 </body>
 </html>
 <?php
-require 'dao/usuariodao.php';
+require 'dao/funcionariodao.php';
 if (! empty($_FILES['imagem'])) {
     $imagem = $_FILES['imagem'];
     $teste = true;

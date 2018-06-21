@@ -1,12 +1,10 @@
 <?php
 
-require_once 'dao/usuariodao.php';
+require_once 'dao/funcionariodao.php';
 
 session_start();
-
-if (isset($_SESSION) && isset($_SESSION["login"]))
-    session_destroy();
-
+/*if (isset($_SESSION) && isset($_SESSION["usuario"]))
+    session_destroy();*/
 if (isset($_POST) && isset($_POST["login"])) {
 	// envia para a página principal
 	// podemos utilizar a função header + location
@@ -17,7 +15,7 @@ if (isset($_POST) && isset($_POST["login"])) {
 	    session_start();
 	    // grava um usuário na sessão
 	    $_SESSION["usuario"] = $_POST["login"]; 
-	   header("Location: teste.php");
+	   header("Location: restrito.php");
 	}
 	else 
 	    echo '<div class="alert alert-danger" role="alert">

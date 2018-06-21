@@ -31,7 +31,7 @@ if (isset($_SESSION) && ($_SESSION["codped"])) {
     // hifen
     $cpfFormatado = substr_replace($cpfFormatado, "-", 11, 0);
 } else
-    echo "erro";
+    header("Location: index.php");
 
 // verifica se foi clicado no botao finalizar
 if (isset($_POST)) {

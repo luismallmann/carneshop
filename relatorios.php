@@ -1,3 +1,10 @@
+<?php
+//se está vazio na está logado, entoa requer login
+if (empty($_SESSION['usuario'])){
+    header("Location: loginfuncionario.php");
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
