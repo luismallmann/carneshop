@@ -1,10 +1,4 @@
 <?php
-//se está vazio na está logado, entoa requer login
-if (empty($_SESSION['usuario'])){
-    header("Location: loginfuncionario.php");
-}
-else{
-// busca informacoes no banco
 require_once 'dao/vendadao.php';
 require_once 'dao/pedidodao.php';
 require_once 'dao/clientedao.php';
@@ -37,7 +31,7 @@ if (isset($_GET) && ($_GET["codvenda"])) {
     $cpfFormatado = substr_replace($cpfFormatado, "-", 11, 0);
 } else
     echo "erro";
-}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,6 +52,11 @@ function fecharAlteracao(){
   		window.opener.location.reload();	
 }
 </script>
+<style>
+body {
+	overflow-x: hidden;
+}
+</style>
 <!-- chama o arquivo que contem as informacoes do boot strap -->
 <?php
 require 'btsinclude.html';

@@ -37,6 +37,7 @@ if (isset($_GET) && isset($_GET['rel'])) {
             rel3();
             break;
         case '4':
+            rel4();
             break;
         default:
             echo 'não existem registros';
@@ -81,8 +82,8 @@ Ordenar o relatório em ordem alfabética</h5>";
             
             echo "<tr>";
             echo "<thead class=\"thead-light\">";
-            echo "<th scope='row'>" . $cpfFormatado . "</td>";
-            echo "<th scope='row'>" . $detalhaRegistro['nomclnt'] . "</td>";
+            echo "<th scope='col'>" . $cpfFormatado . "</td>";
+            echo "<th scope='col'>" . $detalhaRegistro['nomclnt'] . "</td>";
             echo "</thead>";
             echo "</tr>";
         }
@@ -118,9 +119,11 @@ function rel2()
             
             echo "<tr>";
             echo "<thead class=\"thead-light\">";
-            echo "<th scope='row'>" . $cpfFormatado . "</td>";
-            echo "<th scope='row'>" . $detalhaRegistro['nomclnt'] . "</td>";
+            echo "<th scope='col'>" . $cpfFormatado . "</td>";
+            echo "<th scope='col'>" . $detalhaRegistro['nomclnt'] . "</td>";
             echo "</thead>";
+            echo "</tr>";
+            echo "<tr>";
             echo "</tr>";
         }
         echo "</table>";
@@ -135,8 +138,8 @@ function rel3()
     $registros = relatorio3();
     $anterior = 0;
     if ($registros != null && count($registros) > 0) {
-        echo "<h5>Relacionar código, quantidade e valor total, agrupadas por mês de vendas realizadas em meses pares de 2017.
-Relacionar da venda com maior valor para a venda com menor valor.</h5>";
+        echo "<h5>Código, quantidade e valor total, agrupadas por mês de vendas realizadas
+ em meses pares de 2017. Relacionar da venda com maior valor para a venda com menor valor.</h5>";
         echo "<div align='center'>";
         echo "<table class='table' style='width:100%'>";
         echo "<thead class='thead-dark'>";
@@ -190,6 +193,43 @@ Relacionar da venda com maior valor para a venda com menor valor.</h5>";
             echo "</thead>";
             echo "</tr>";
         }
+        echo "</table>";
+        echo "</div>";
+    } else {
+        echo "Não existem registros";
+    }
+}
+
+function rel4()
+{
+    $registros = relatorio4();
+    if ($registros != null && count($registros) > 0) {
+        echo "<h5>Código e nome do produto, data e valor total da última venda realizada. Ordenar o 
+relatório em ordem alfabética.</h5>";
+        echo "<div align='center'>";
+        echo "<table class='table' style='width:100%'>";
+        echo "<thead class='thead-dark'>";
+        echo "<tr>
+        <th scope='col'>Código</th>
+        <th scope='col'>Produto</th>
+        </tr>
+        </thead>";
+        foreach ($registros as $detalhaRegistro) {
+            echo "<tr>";
+            echo "<thead class=\"thead-light\">";
+            echo "<th scope='row'>" . $detalhaRegistro['codprod'] . "</td>";
+            echo "<th scope='row'>" . $detalhaRegistro['nomprod'] . "</td>";
+            echo "</thead>";
+            echo "</tr>";
+        }
+        echo "<tr class='bg-info'>";
+        echo "<th scope='col'> Data da Compra: </td>";
+        echo "<th scope='col'>" . date('d/m/Y',strtotime($detalhaRegistro['datvenda'])) . "</td>";
+        echo "</tr>";
+        echo "<tr class='bg-success'>";
+        echo "<th scope='col'> Valor Total (R$): </td>";
+        echo "<th scope='col'>" . $detalhaRegistro['valvenda'] . "</td>";
+        echo "</tr>";
         echo "</table>";
         echo "</div>";
     } else {

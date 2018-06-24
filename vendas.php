@@ -15,9 +15,9 @@ if (empty($_SESSION['usuario'])){
 require_once 'btsinclude.html';
 ?>
 <!-- script popup -->
-<script language=javascript type="text/javascript">
+<script lang=javascript type="text/javascript">
 function gerenciarVenda(url){
-	varWindow = window.open (url, 0, 'toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=800,height=500')
+	varWindow = window.open (url, 0, 'toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=850,height=800')
 }
 </script>
 <!--constroi o topo-->

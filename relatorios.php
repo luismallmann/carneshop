@@ -21,7 +21,7 @@ require_once 'btsinclude.html';
      width: 100px; 
 }
 </style>
-<script language=javascript type="text/javascript">
+<script lang=javascript type="text/javascript">
 function gerenciarVenda(url){
 	varWindow = window.open (url, 0, 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=800,height=500')
 }

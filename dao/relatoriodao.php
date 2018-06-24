@@ -74,4 +74,33 @@ V.CODVENDA ORDER BY DATE_PART('MONTH' , DATVENDA), VALVENDA DESC;");
         return null;
     }
 }
+function relatorio4()
+{
+    global $conexao;
+    
+    try {
+        $comando = $conexao->prepare("SELECT  p.codprod, p.nomprod, v.datvenda, v.valvenda
+FROM pedido_produto pp
+INNER JOIN pedido pe ON pe.codped = pp.pedidocodped
+INNER JOIN venda v on v.pedidocodped = pe.codped
+INNER JOIN produto p on p.codprod = pp.produtocodprod
+WHERE v.datvenda = (select max(datvenda) from venda)
+and v.horvenda =  (select max(horvenda) from venda where datvenda = v.datvenda)
+order by p.nomprod");
+        
+        $comando->execute();
+        // verificamos se foram retornados registros
+        if ($comando->rowCount() > 0) {
+            $i = 0;
+            // descarrega um registro por vez
+            while ($reg = $comando->fetch(PDO::FETCH_ASSOC)) {
+                // registro é armazenado no vetor categoria
+                $registro[$i ++] = $reg;
+            }
+        }
+        return $registro;
+    } catch (PDOException $e) {
+        return null;
+    }
+}
 ?>
