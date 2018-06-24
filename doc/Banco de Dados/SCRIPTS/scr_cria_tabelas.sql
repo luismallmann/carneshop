@@ -8,10 +8,11 @@ CREATE TABLE cliente (
   PRIMARY KEY (cpfclnt));
 COMMENT ON TABLE cliente IS 'Tabela que contém os dados pessoais de cada cliente.';
 COMMENT ON COLUMN cliente.cpfclnt IS 'CPF do Cliente';
-COMMENT ON COLUMN cliente.emlclnt IS 'Email do Cliete';
+COMMENT ON COLUMN cliente.emlclnt IS 'Email do Cliente';
 COMMENT ON COLUMN cliente.nomclnt IS 'Nome do Cliente';
 COMMENT ON COLUMN cliente.sexclnt IS 'sexo do cliente';
 COMMENT ON COLUMN cliente.nasclnt IS 'Data de Nascimento do Cliente';
+COMMENT ON COLUMN cliente.senclnt IS 'senha de acesso do cliente';
 CREATE TABLE endereco_cliente (
   codendclnt     SERIAL NOT NULL, 
   cidendclnt     varchar(30) NOT NULL, 
@@ -23,7 +24,7 @@ CREATE TABLE endereco_cliente (
   cmpendclnt     varchar(20), 
   clientecpfclnt numeric(11, 0) NOT NULL, 
   PRIMARY KEY (codendclnt));
-COMMENT ON TABLE endereco_cliente IS 'Enderecos do cliente. Pode haver mais de um';
+COMMENT ON TABLE endereco_cliente IS 'Enderecos do cliente. Pode existir mais de um para o mesmo cliente';
 COMMENT ON COLUMN endereco_cliente.codendclnt IS 'codigo do endereco do cliente. é gerado automaticamente de forma sequencial.';
 COMMENT ON COLUMN endereco_cliente.cidendclnt IS 'cidade do endereco cadastrado';
 COMMENT ON COLUMN endereco_cliente.estendclnt IS 'estado do endereco cadastrado';
@@ -32,6 +33,7 @@ COMMENT ON COLUMN endereco_cliente.ruaendclnt IS 'rua do endereco cadastrado';
 COMMENT ON COLUMN endereco_cliente.numendclnt IS 'numero do endereco';
 COMMENT ON COLUMN endereco_cliente.baiendclnt IS 'bairro do endereco cadastrado';
 COMMENT ON COLUMN endereco_cliente.cmpendclnt IS 'complemento do endereco cadastrado. pode ser opcional';
+COMMENT ON COLUMN endereco_cliente.clientecpfclnt IS 'chave estrangeira que identica a qual cliente está vinculado o endereco';
 CREATE TABLE funcionario (
   codfun SERIAL NOT NULL 			, 
   nomfun varchar(40) NOT NULL 	, 
@@ -39,7 +41,7 @@ CREATE TABLE funcionario (
   senfun varchar(32) NOT NULL, 
   PRIMARY KEY (codfun));
 COMMENT ON TABLE funcionario IS 'detalhamento do funcionario/administrador do sistema';
-COMMENT ON COLUMN funcionario.codfun IS 'código do funcionario';
+COMMENT ON COLUMN funcionario.codfun IS 'código do funcionario, gerado automaticamente de forma sequencial';
 COMMENT ON COLUMN funcionario.nomfun IS 'nome do funcionario';
 COMMENT ON COLUMN funcionario.logfun IS 'login do funcionario';
 COMMENT ON COLUMN funcionario.senfun IS 'senha do funcionario';
@@ -47,16 +49,20 @@ CREATE TABLE pedido (
   codped         SERIAL NOT NULL, 
   clientecpfclnt numeric(11, 0) NOT NULL, 
   PRIMARY KEY (codped));
-COMMENT ON TABLE pedido IS 'gerenciamento dos produtos comprados';
+COMMENT ON TABLE pedido IS 'tabela que contem o codigo de identificação do pedido e a qual cliente ele está vinculado. Lembrando que nem todo pedido é uma venda.';
 COMMENT ON COLUMN pedido.codped IS 'codigo do pedido';
+COMMENT ON COLUMN pedido.clientecpfclnt IS 'chave estrangeira a qual vincula o cpf ao pedido';
 CREATE TABLE pedido_produto (
   itempedidoprod SERIAL NOT NULL, 
   produtocodprod int4 NOT NULL, 
   pedidocodped   int4 NOT NULL, 
   qntped         int4 NOT NULL, 
   PRIMARY KEY (itempedidoprod));
+COMMENT ON TABLE pedido_produto IS 'tabela que relaciona os produtos selecionados ao pedido. pode existir mais de um produto no mesmo pedido';
 COMMENT ON COLUMN pedido_produto.itempedidoprod IS 'item do produto no pedido (ex: 1,2,3...)';
-COMMENT ON COLUMN pedido_produto.qntped IS 'quantidade de itens pedidos';
+COMMENT ON COLUMN pedido_produto.produtocodprod IS 'chave estrangeira que identifica o produto';
+COMMENT ON COLUMN pedido_produto.pedidocodped IS 'chave estrangeira que identifca o pedido';
+COMMENT ON COLUMN pedido_produto.qntped IS 'quantidade de itens pedidos do mesmo produto';
 CREATE TABLE produto (
   codprod SERIAL NOT NULL 	, 
   desprod varchar(140), 
@@ -66,20 +72,23 @@ CREATE TABLE produto (
   imgprod varchar(80), 
   PRIMARY KEY (codprod));
 COMMENT ON TABLE produto IS 'informacoes do produto';
-COMMENT ON COLUMN produto.codprod IS 'codigo do produto';
+COMMENT ON COLUMN produto.codprod IS 'codigo do produto gerado de forma sequencial';
 COMMENT ON COLUMN produto.desprod IS 'descricao do produto';
 COMMENT ON COLUMN produto.nomprod IS 'nome do produto';
-COMMENT ON COLUMN produto.valprod IS 'valor do produto(RS)      ';
+COMMENT ON COLUMN produto.valprod IS 'valor do produto(R$)';
 COMMENT ON COLUMN produto.estprod IS 'quantidade em estoque do produto';
+COMMENT ON COLUMN produto.imgprod IS 'nome de imagem cadastrada na pasta imgproduto';
 CREATE TABLE telefone_cliente (
   codtelclnt     SERIAL NOT NULL, 
   dddtelclnt     numeric(2, 0) NOT NULL, 
   numtelclnt     numeric(9, 0) NOT NULL, 
   clientecpfclnt numeric(11, 0) NOT NULL, 
   PRIMARY KEY (codtelclnt));
+COMMENT ON TABLE telefone_cliente IS 'telefones do cliente. pode exitir mais de um registro';
 COMMENT ON COLUMN telefone_cliente.codtelclnt IS 'codigo do telefone do cliente. gerado automaticamente de forma sequencial';
 COMMENT ON COLUMN telefone_cliente.dddtelclnt IS 'DDD do telefone do cliente.';
 COMMENT ON COLUMN telefone_cliente.numtelclnt IS 'numero do telefone cadastrado para o cliente';
+COMMENT ON COLUMN telefone_cliente.clientecpfclnt IS 'chave estrangeira que identifica a qual cliente está vinculado o telefone';
 CREATE TABLE venda (
   codvenda     SERIAL NOT NULL, 
   pedidocodped int4 NOT NULL, 
@@ -90,6 +99,7 @@ CREATE TABLE venda (
   PRIMARY KEY (codvenda));
 COMMENT ON TABLE venda IS 'detalhamento da venda (pedido efetuado)';
 COMMENT ON COLUMN venda.codvenda IS 'codigo da venda';
+COMMENT ON COLUMN venda.pedidocodped IS 'codigo do pedido ao qual a venda está relacionada';
 COMMENT ON COLUMN venda.valvenda IS 'valor total da venda';
 COMMENT ON COLUMN venda.stsvenda IS 'status da venda';
 COMMENT ON COLUMN venda.datvenda IS 'data venda';

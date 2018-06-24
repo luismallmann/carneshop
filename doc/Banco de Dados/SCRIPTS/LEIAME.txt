@@ -1,0 +1,13 @@
+		INTRUÇÕES PARA A CRIAÇÃO DA BASE DE DADOS
+========================================================================
+1-Criar o banco de dados carneshop
+
+2-Criar as tabelas conforme o script disponível:
+scr_cria_tabelas.sql
+
+3-Adicionar os registros na seguinte ordem:
+cliente.sql
+endereco_cliente.sql
+telefone_cliente.sql
+produto.sql
+vendas.sql
