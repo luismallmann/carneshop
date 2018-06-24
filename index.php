@@ -39,12 +39,12 @@ if (isset($_POST) && isset($_POST["qntdped"])) {
         echo "<script> alert('Adicione pelo menos uma Unidade')</script>";
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
+<title>CarneShop</title>
 <!--constroi o topo-->
 <div id="box-topo" class="container-1230"
 	style="background-color: #8f5227";>
@@ -60,7 +60,7 @@ if (isset($_POST) && isset($_POST["qntdped"])) {
 		</div>
 	</div>
 </div>
-<title>CarneShop</title>
+
 <!-- chama o arquivo que contem as informacoes do boot strap -->
 <?php
 require_once 'btsinclude.html';
@@ -78,7 +78,9 @@ require_once 'btsinclude.html';
 	padding: 10px;
 	border-radius: 10px;
 }
-
+.contato {
+  text-align: center;
+}
 #mascara {
 	position: absolute;
 	left: 0;
@@ -87,20 +89,16 @@ require_once 'btsinclude.html';
 	background-color: #000;
 	display: none;
 }
-
 .fechar {
 	display: block;
 	text-align: right;
 }
-
 }
 .barra {
 	vertical-align: center;
 }
 </style>
 </head>
-
-
 <body>	
 <?php
 // verifica se o usuario já está logado, caso estiver exibe o login e permite voltar ao carrinho
@@ -125,6 +123,7 @@ if ($logado == true) {
         // caso clique em sair
         if (isset($_POST['sair_x'])) {
             session_destroy();
+            header("Location: index.php");
         } // caso clique para voltar ao carrinho
         else if (isset($_POST['carrinho_y'])) {
             header("Location: carrinho.php");
@@ -172,6 +171,15 @@ if ($produto != null && count($produto) > 0) {
     echo "Não existem produtos cadastrados!";
 }
 ?>
+<div clas>
+<div class="contato" align="center"
+	style="background-color: #8f5227">
+		<h1></h1><font color="white"><b>CarneShop</b><br>
+		| carneshop@carneshop.com.br |<br>
+		| (49) 3600-0000 |</font></h1>
+		<br>
+		<a href="restrito.php"><img border="0" alt="restrito" src="img/user.png" width="56" height="56">
+</div>
 </body>
 </html>
 <?php

@@ -21,10 +21,6 @@ require_once 'btsinclude.html';
 		<li class="nav-item"><a class="nav-link active" id="pills-inicio-tab"
 			data-toggle="pill" href="#pills-inicio" role="tab"
 			aria-controls="pills-inicio" aria-selected="true">Inicio</a></li>
-		<li class="nav-item"><a class="nav-link" id="pills-funcionario-tab"
-			data-toggle="pill" href="#pills-funcionario" role="tab"
-			aria-controls="pills-funcionario" aria-selected="false">Cadastrar
-				funcionario</a></li>
 		<li class="nav-item"><a class="nav-link"
 			id="pills-cadastroproduto-tab" data-toggle="pill"
 			href="#pills-cadastroproduto" role="tab"
@@ -36,7 +32,10 @@ require_once 'btsinclude.html';
 				Cadastrados</a></li>
 		<li class="nav-item"><a class="nav-link" id="pills-estoque-tab"
 			data-toggle="pill" href="#pills-estoque" role="tab"
-			aria-controls="pills-estoque" aria-selected="false">Listar/Editar
+			aria-controls="pills-estoque" aria-selected="false">Estoque</a></li>
+		<li class="nav-item"><a class="nav-link" id="pills-editaprod-tab"
+			data-toggle="pill" href="#pills-editaprod" role="tab"
+			aria-controls="pills-editaprod" aria-selected="false">Listar/Editar
 				Produtos</a></li>
 		<li class="nav-item"><a class="nav-link" id="pills-vendas-tab"
 			data-toggle="pill" href="#pills-vendas" role="tab"
@@ -53,19 +52,21 @@ require_once 'btsinclude.html';
 			role="tabpanel" aria-labelledby="pills-inicio-tab" align="center"
 			style="background-color: #8f5227";>
 			<img src="img/logo.png" align="middle">
+			<h1 style="color:white; font-family: inherit;"><b>Painel de Controle</b></h1>
+			
 		</div>
 		<div class="tab-pane fade" id="pills-cadastroproduto" role="tabpanel"
 			aria-labelledby="pills-cadastroproduto-tab">/<?php include_once 'cadastroproduto.php'; ?>*/</div>
 		<div class="tab-pane fade" id="pills-clientes" role="tabpanel"
-			aria-labelledby="pills-clientes"><?php include "listaClientes.php"; ?></div>
+			aria-labelledby="pills-clientes"><?php include_once "listaClientes.php"; ?></div>
 		<div class="tab-pane fade" id="pills-vendas" role="tabpanel"
-			aria-labelledby="pills-vendas"><?php include "vendas.php"; ?></div>
+			aria-labelledby="pills-vendas"><?php include_once "vendas.php"; ?></div>
+		<div class="tab-pane fade" id="pills-editaprod" role="tabpanel"
+			aria-labelledby="pills-editaprod-tab"><?php include_once "listadeprodutos.php"; ?></div>
 		<div class="tab-pane fade" id="pills-estoque" role="tabpanel"
-			aria-labelledby="pills-estoque-tab"><?php include_once "listadeprodutos.php"; ?></div>
-		<div class="tab-pane fade" id="pills-funcionario" role="tabpanel"
-			aria-labelledby="pills-funcionario-tab"><?php include "cadastrofunci.php"; ?></div>
+			aria-labelledby="pills-estoque-tab"><?php include_once "estoque.php"; ?></div>
 		<div class="tab-pane fade" id="pills-relatorios" role="tabpanel"
-			aria-labelledby="pills-relatorios-tab"><?php include "relatorios.php"; ?></div>
+			aria-labelledby="pills-relatorios-tab"><?php include_once "relatorios.php"; ?></div>
 	</div>
 </body>
 </html>

@@ -39,7 +39,7 @@ function gerenciarVenda(url){
 		<button type="submit" class="btn btn-secondary btn-sm btn-block" name="relatorio3" onclick="gerenciarVenda('exiberelatorio.php?rel=3')">3 - Relacionar código, quantidade 
 		e valor total, agrupadas por mês de vendas realizadas em meses<br> pares de 2017. Relacionar da venda com maior valor para a venda com
 		 menor valor</button>
-		 <button type="submit" class="btn btn-secondary btn-sm btn-block" name="relatorio4" onclick="gerenciarVenda('exiberelatorio.php?rel=3')">4 - Relacionar o código e nome do 
+		 <button type="submit" class="btn btn-secondary btn-sm btn-block" name="relatorio4" onclick="gerenciarVenda('exiberelatorio.php?rel=4')">4 - Relacionar o código e nome do 
 		 produto, data e valor total da última venda realizada. Ordenar o relatório<br> em ordem alfabética</button>
 	</div>
 </body>
