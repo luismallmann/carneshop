@@ -153,7 +153,7 @@
         
         try {
             $comando = $conexao->prepare("SELECT C.CPFCLNT, C.EMLCLNT, C.NOMCLNT, E.CIDENDCLNT, 
-        E.ESTENDCLNT FROM CLIENTE C INNER JOIN  ENDERECO_CLIENTE E ON C.CPFCLNT = E.CLIENTECPFCLNT;"); // ordenação por padrão é ascendente
+        E.ESTENDCLNT FROM CLIENTE C INNER JOIN  ENDERECO_CLIENTE E ON C.CPFCLNT = E.CLIENTECPFCLNT ORDER BY C.NOMCLNT;"); // ordenação por padrão é ascendente
             $comando->execute();
             // verificamos se foram retornados registros
             if ($comando->rowCount() > 0) {

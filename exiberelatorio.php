@@ -12,6 +12,12 @@ function closeJanela() {
 	  		window.close();
 	}
 	</script>
+<!-- oculta a scrollbar horizontal -->
+<style>
+body {
+	overflow-x: hidden;
+}
+</style>
 </head>
 <body>
 	<div>
@@ -19,7 +25,7 @@ function closeJanela() {
 require_once 'dao/relatoriodao.php';
 if (isset($_GET) && isset($_GET['rel'])) {
     $opcao = $_GET['rel'];
-    //busca a opcao envia pelo por get e abre a respectiva funcao que exibe o relatorio
+    // busca a opcao envia pelo por get e abre a respectiva funcao que exibe o relatorio
     switch ($opcao) {
         case '1':
             rel1();
@@ -28,6 +34,7 @@ if (isset($_GET) && isset($_GET['rel'])) {
             rel2();
             break;
         case '3':
+            rel3();
             break;
         case '4':
             break;
@@ -47,6 +54,7 @@ if (isset($_GET) && isset($_GET['rel'])) {
 </body>
 </html>
 <?php
+
 function rel1()
 {
     $registros = relatorio1();
@@ -84,6 +92,7 @@ Ordenar o relatório em ordem alfabética</h5>";
         echo "Não existem registros";
     }
 }
+
 function rel2()
 {
     $registros = relatorio2();
@@ -111,6 +120,73 @@ function rel2()
             echo "<thead class=\"thead-light\">";
             echo "<th scope='row'>" . $cpfFormatado . "</td>";
             echo "<th scope='row'>" . $detalhaRegistro['nomclnt'] . "</td>";
+            echo "</thead>";
+            echo "</tr>";
+        }
+        echo "</table>";
+        echo "</div>";
+    } else {
+        echo "Não existem registros";
+    }
+}
+
+function rel3()
+{
+    $registros = relatorio3();
+    $anterior = 0;
+    if ($registros != null && count($registros) > 0) {
+        echo "<h5>Relacionar código, quantidade e valor total, agrupadas por mês de vendas realizadas em meses pares de 2017.
+Relacionar da venda com maior valor para a venda com menor valor.</h5>";
+        echo "<div align='center'>";
+        echo "<table class='table' style='width:100%'>";
+        echo "<thead class='thead-dark'>";
+        echo "<tr>
+        <th scope='col'>Código</th>
+        <th scope='col'>Qnt de Produtos</th>
+        <th scope='col'>Valor Total (R$)</th>
+        </tr>
+        </thead>";
+        
+        foreach ($registros as $detalhaRegistro) {
+            echo "<tr>";
+            echo "<thead class=\"thead-light\">";
+            
+            if ($anterior == 0) {
+                echo "<tr>";
+                if ($detalhaRegistro['date_part'] == '2')
+                    echo "<th class='bg-info' colspan='3'>Fevereiro</td>";
+                else if ($detalhaRegistro['date_part'] == '4')
+                    echo "<th class='bg-info' colspan='3'>Abril</td>";
+                else if ($detalhaRegistro['date_part'] == '6')
+                    echo "<th class='bg-info' colspan='3'>Junho</td>";
+                else if ($detalhaRegistro['date_part'] == '8')
+                    echo "<th class='bg-info' colspan='3'>Agosto</td>";
+                else if ($detalhaRegistro['date_part'] == '10')
+                    echo "<th class='bg-info' colspan='3'>Outubro</td>";
+                else if ($detalhaRegistro['date_part'] == '12')
+                    echo "<th class='bg-info' colspan='3'>Dezembro</td>";
+                echo "<tr>";
+            } else if ($anterior != $detalhaRegistro['date_part']) {
+                echo "<tr>";
+                if ($detalhaRegistro['date_part'] == '2')
+                    echo "<th class='bg-info' colspan='3'>Fevereiro</td>";
+                else if ($detalhaRegistro['date_part'] == '4')
+                    echo "<th class='bg-info' colspan='3'>Abril</td>";
+                else if ($detalhaRegistro['date_part'] == '6')
+                    echo "<th class='bg-info' colspan='3'>Junho</td>";
+                else if ($detalhaRegistro['date_part'] == '8')
+                    echo "<th class='bg-info' colspan='3'>Agosto</td>";
+                else if ($detalhaRegistro['date_part'] == '10')
+                    echo "<th class='bg-info' colspan='3'>Outubro</td>";
+                else if ($detalhaRegistro['date_part'] == '12')
+                    echo "<th class='bg-info' colspan='3'>Dezembro</td>";
+                echo "</tr>";
+            }
+            $anterior = $detalhaRegistro['date_part'];
+            echo "<tr>";
+            echo "<th scope='co'>" . $detalhaRegistro['codvenda'] . "</td>";
+            echo "<th scope='col'>" . $detalhaRegistro['count'] . "</td>";
+            echo "<th scope='col'>" . $detalhaRegistro['valvenda'] . "</td>";
             echo "</thead>";
             echo "</tr>";
         }

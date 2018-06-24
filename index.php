@@ -108,7 +108,7 @@ if ($logado == true) {
     echo '<div class="row" style="background-color: #bfbfbf";>
 	<div class="col">
 		<form action="" method="post" name="frmLogado">
-		<p align="left">Olá ' . $usuario["nomclnt"] . '!&emsp;(Não évocê?
+		<p align="left">Olá ' . $usuario["nomclnt"] . '!&emsp;(Não é você?
 				<input class="sair" name="sair" type="image" src="img/exit.png" value="true"> )
 		</p>
 		</form>

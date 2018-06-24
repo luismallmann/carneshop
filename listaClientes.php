@@ -44,7 +44,7 @@ require 'btsinclude.html';
         echo "</table>";
         echo "</div>";
     } else {
-        echo "Não existem produtos cadastrados!";
+        echo "Não existem clientes cadastrados!";
     }
     ?>
 </body>

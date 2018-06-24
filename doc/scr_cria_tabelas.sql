@@ -46,7 +46,6 @@ COMMENT ON COLUMN funcionario.senfun IS 'senha do funcionario';
 CREATE TABLE pedido (
   codped         SERIAL NOT NULL, 
   clientecpfclnt numeric(11, 0) NOT NULL, 
-  clienteemlclnt varchar(40), 
   PRIMARY KEY (codped));
 COMMENT ON TABLE pedido IS 'gerenciamento dos produtos comprados';
 COMMENT ON COLUMN pedido.codped IS 'codigo do pedido';
