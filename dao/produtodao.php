@@ -50,18 +50,17 @@ function lista()
     }
 }
 
-function atualiza($produto)
+function atualiza($codigo, $produto)
 {
     global $conexao;
     try {
-        $comando = $conexao->prepare("update categoria set nomprod = ?, desprod = ?, valprod = ?, estprod = ?, imgprod = ? where codprod = ?");
+        $comando = $conexao->prepare("update produto set nomprod = ?, desprod = ?, valprod = ?, estprod = ? where codprod = ?");
         $comando->execute([
-            $produto["nome"],
-            $produto["descrição"],
-            $categoria["preço"],
-            $categoria["estoque"],
-            $categoria["imagem"],
-            $produto["codigo"]
+            $produto['nome'],
+            $produto['descricao'],
+            $produto['preco'],
+            $produto['estoque'],
+            $codigo
         ]);
         return true;
     } catch (PDOException $e) {

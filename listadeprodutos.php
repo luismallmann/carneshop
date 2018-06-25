@@ -13,6 +13,12 @@ if (isset($_POST) && isset($_POST["produtoX"])) {
 <head>
 <meta charset="utf-8">
 <title>CarneShop</title>
+<script lang=javascript type="text/javascript">
+function gerenciarVenda(url){
+	varWindow = window.open (url, "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=800,height=800")
+}
+</script>
+
 <!-- chama o arquivo que contem as informacoes do boot strap -->
 <?php
 require_once 'btsinclude.html';
@@ -36,9 +42,8 @@ require_once 'btsinclude.html';
                 		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>" . $cat["desprod"] . "</p>";
                 		
                 		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>Preço por kg: R$ "  . $cat["valprod"] . "</p>";
-                		
-                        echo "<a href='alteraproduto.php?nome=$cat[nomprod]&estoque=$cat[estprod]'>";
-                		echo "<button style='margin: 3px 30%' name='add' class='btn btn-danger' type='submit'>Alterar</button>";
+                		$url='alteraproduto.php?codprod='.$cat['codprod'];
+                        echo "<button class='btn btn-danger' onclick=\"gerenciarVenda('$url')\">Alterar</button>";
                         echo "</a>";
                		echo "</td>";
                 echo "</tr>";
