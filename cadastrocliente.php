@@ -1,4 +1,4 @@
-<!-- chama o topo/cabeçalho e o bootstrap -->
+﻿<!-- chama o topo/cabeçalho e o bootstrap -->
 	<?php
 require_once 'btsinclude.html';
 require_once 'dao/clientedao.php';
@@ -12,6 +12,7 @@ if (isset($_POST) && isset($_POST["nome"]) && isset($_POST["sexo"]) && isset($_P
         header("Location: index.php");
     }
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -76,10 +77,50 @@ function formatar(mascara, documento){
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-4">
-					<label for="inserirCPF">CPF*</label> <input type="text" name="cpf"
+					<label for="inserirCPF">CPF*</label> <input type="text" name="cpf" id="inputCpf"
 						required="required" class="form-control" maxlength="14"
-						OnKeyPress="formatar('###.###.###-##', this)">
+						>
+						<!--OnKeyPress="formatar('###.###.###-##', this)"-->
+					<script>
+						
+function TestaCPF(strCPF) {
+    var Soma;
+    var Resto;
+    Soma = 0;
+  if (strCPF == "00000000000"){
+		alert("CPF invalido");
+		return;
+	}
+  for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+  Resto = (Soma * 10) % 11;
+   
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10)) ) {
+		alert("CPF invalido");
+		return;
+	}
+   
+  Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+   
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11) ) ) {
+		alert("CPF invalido");
+		return;
+	}
+}
+
+						
+						var campo = document.getElementById("inputCpf");
+						campo.addEventListener("blur", function(e) {
+							TestaCPF(campo.value);
+						});
+						
+						
+					</script>
 				</div>
+				
 				<div class="form-group col-md-4">
 					<label for="inserirNascimento">Data de Nascimento*</label> <input
 						type="date" name="datanas" required="required"
@@ -177,9 +218,6 @@ function formatar(mascara, documento){
 	</div>
 </div>
 
-
-
-
-
 </body>
 </html>
+
