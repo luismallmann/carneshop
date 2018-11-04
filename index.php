@@ -1,20 +1,20 @@
 <?php
-require_once 'dao/produtodao.php';
 session_start();
+require_once 'dao/produtodao.php';
 $logado = false;
 if (isset($_SESSION['login'])) {
     require_once 'dao/clientedao.php';
-    
+
     $usuario = buscaDadosPessoaisLogin($_SESSION['login']);
-    
+
     $logado = true;
 }
 if (isset($_POST) && isset($_POST["qntdped"])) {
-    
+
     $codprod = $_POST["codprod"];
     $qntdped = $_POST["qntdped"];
     // usa a mesma sessão criada no login
-    
+
     if ($qntdped > 0) {
         if (buscaQuantidade($codprod) >= $qntdped) {
             $params = '?' . http_build_query(array(
@@ -27,7 +27,7 @@ if (isset($_POST) && isset($_POST["qntdped"])) {
                 require_once 'dao/pedidodao.php';
                 if (atualizaPedido($codped, $codprod, $qntdped) == true) {
                     header("Location: carrinho.php");
-                }else{
+                } else {
                     echo "<script> alert('Quantidade superior ao estoque disponível')</script>";
                 }
             } else
@@ -45,26 +45,6 @@ if (isset($_POST) && isset($_POST["qntdped"])) {
 <head>
 <meta charset="utf-8">
 <title>CarneShop</title>
-<!--constroi o topo-->
-<div id="box-topo" class="container-1230"
-	style="background-color: #8f5227";>
-	<div class="row">
-		<div class="col">
-			<a href="index.php"> <img src="img/logo.png" alt="CarneShop"
-				title="CarneShop">
-			</a>
-		</div>
-		<div class="col-md-auto"></div>
-		<div class="col">
-			<img src="img/carne.png" alt="CarneShop" title="CarneShop"> </a>
-		</div>
-	</div>
-</div>
-
-<!-- chama o arquivo que contem as informacoes do boot strap -->
-<?php
-require_once 'btsinclude.html';
-?>
 <style type="text/css">
 .window {
 	display: none;
@@ -74,12 +54,8 @@ require_once 'btsinclude.html';
 	left: 0;
 	top: 0;
 	background: #FFF;
-	z-index: 9900;
-	padding: 10px;
-	border-radius: 10px;
-}
-.contato {
-  text-align: center;
+	padding: 0px;
+	border-radius: 0px;
 }
 #mascara {
 	position: absolute;
@@ -98,8 +74,77 @@ require_once 'btsinclude.html';
 	vertical-align: center;
 }
 </style>
+<style>
+.topo {
+	width: 100%;
+	height: 300px;
+	margin-left:0px;
+	padding-left: 0px;
+	margin-right: 0px;
+	padding-right: 0px;
+	background-color: #8f5227;
+}
+.contato {
+	width: 100%;
+	height: 150px;
+	text-align: center;
+	margin-left:0px;
+	padding-left: 0px;
+	margin-right: 0px;
+	padding-right: 0px;
+}
+body {
+   margin:0;
+}
+</style>
+<!-- chama o arquivo que contem as informacoes do boot strap -->
+<?php
+include_once 'btsinclude.html';
+include_once "exibeprodutos.php";
+?>
 </head>
-<body>	
+<body>
+	<div class="topo" id="box-topo">
+		<a href="index.php"><img src="img/topo.png" alt="CarneShop"
+			title="CarneShop"></a>
+	</div>
+	<div class="row">
+		<!-- cria menu lateral -->
+		<div class="col-2">
+			<div class="list-group" id="list-tab" role="tablist">
+				<a class="list-group" style="background-color: #8f5227;"
+					list-cat-list" data-toggle="list" role="tab" aria-controls="cat"><font
+					color="white" size="4"><b>Produtos</b></font></a> <a
+					class="list-group-item list-group-item-action active"
+					style="background-color: #f6d18a;"
+					list-todos-list" data-toggle="list" href="#list-todos" role="tab"
+					aria-controls="todos">Todos <span
+					class="badge badge-danger badge-pill"><?php $categoria = "Todos"; contaTodos();?></span></a>
+				<a class="list-group-item list-group-item-action"
+					style="background-color: #f6d18a;"
+					list-bovina-list" data-toggle="list" href="#list-bovina" role="tab"
+					aria-controls="bovina">Bovina <span
+					class="badge badge-danger badge-pill"><?php $categoria = "Bovina"; contaCategoria($categoria);?></span></a>
+				<a class="list-group-item list-group-item-action"
+					style="background-color: #f6d18a;"
+					list-suina-list" data-toggle="list" href="#list-suina" role="tab"
+					aria-controls="profile">Suína <span
+					class="badge badge-danger badge-pill"><?php $categoria = "Suina"; contaCategoria($categoria);?></span></a>
+				<a class="list-group-item list-group-item-action"
+					style="background-color: #f6d18a;"
+					list-frango-list" data-toggle="list" href="#list-frango" role="tab"
+					aria-controls="frango">Frango <span
+					class="badge badge-danger badge-pill"><?php $categoria = "Frango"; contaCategoria($categoria);?></span></a>
+				<a class="list-group-item list-group-item-action"
+					id="list-outros-list" data-toggle="list" href="#list-outros"
+					style="background-color: #f6d18a;" tab" aria-controls="outros">Outros
+					<span class="badge badge-danger badge-pill"><?php $categoria = "Outros"; contaCategoria($categoria);?></span>
+				</a>
+			</div>
+		</div>
+
+
+		<div class="col-10">
 <?php
 // verifica se o usuario já está logado, caso estiver exibe o login e permite voltar ao carrinho
 if ($logado == true) {
@@ -130,59 +175,35 @@ if ($logado == true) {
         }
     }
 }
-
-// lista os produtos cadastrados
-$produto = lista();
-if ($produto != null && count($produto) > 0) {
-    echo "<div align='center'>";
-    echo "<table>";
-    foreach ($produto as $cat) {
-        echo "<tr>";
-        echo "<td>";
-        echo "<img src='imgproduto/" . $cat["imgprod"] . "'/>";
-        echo "</td>";
-        echo "<td>";
-        echo "<p style='text-align: center; padding: 10px 0px 0px; color: #B22222; font-size: 30px; font-family: Impact, fantasy;'>" . $cat['nomprod'] . "</p>";
-        
-        echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>" . $cat["desprod"] . "</p>";
-        
-        echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>Preço por kg: R$ " . $cat["valprod"] . "</p>";
-        
-        echo "<form style='padding: 10px' action='' method='post' name='frmAdicionar" . $cat["codprod"] . "'>
-									<div class='input-group mb-1'>
-										<div class='input-group-prepend'>
-											<div class='input-group-text'>+/-</div>
-										</div>
-                                        <input type='hidden' name='codprod' class='form-control'
-											id='cod' value='" . $cat["codprod"] . "'>            
-										<input type='number' name='qntdped' class='form-control'
-											id='quantidade' min='1'>
-									</div>
-							</div>
-						</div>
-						<button style='margin: 3px 30%' name='add' class='btn btn-danger' type='submit'>Adicionar</button>
-						</form>";
-        echo "</td>";
-        echo "</tr>";
-    }
-    echo "</table>";
-    echo "</div>";
-} else {
-    echo "Não existem produtos cadastrados!";
-}
 ?>
-<div clas>
-<div class="contato" align="center"
-	style="background-color: #8f5227">
-		<h1></h1><font color="white"><b>CarneShop</b><br>
-		| carneshop@carneshop.com.br |<br>
-		| (49) 3600-0000 |</font></h1>
-		<br>
-		<a href="restrito.php"><img border="0" alt="restrito" src="img/user.png" width="56" height="56">
-</div>
+<div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="list-todos"
+					role="tabpanel" aria-labelledby="list-todos-list"><?php $categoria = "Todos"; listaTodos()?></div>
+				<div class="tab-pane fade" id="list-bovina" role="tabpanel"
+					aria-labelledby="list-bovina-list"><?php $categoria = "Bovina"; porCategoria($categoria)?></div>
+				<div class="tab-pane fade" id="list-suina" role="tabpanel"
+					aria-labelledby="list-suina-list"><?php $categoria = "Suina"; porCategoria($categoria)?></div>
+				<div class="tab-pane fade" id="list-frango" role="tabpanel"
+					aria-labelledby="list-frango-list"><?php $categoria = "Frango"; porCategoria($categoria)?></div>
+				<div class="tab-pane fade" id="list-outros" role="tabpanel"
+					aria-labelledby="list-outros-list"><?php $categoria = "Outros"; porCategoria($categoria)?></div>
+
+
+			</div>
+		</div>
+	</div>
+	<div clas="topo">
+		<div class="contato" align="center" style="background-color: #8f5227">
+			<h1></h1>
+			<font color="white"><b>CarneShop</b><br> | carneshop@carneshop.com.br
+				|<br> | (49) 3600-0000 |</font>
+			</h1>
+			<br> <a href="restrito.php"><img border="0" alt="restrito"
+				src="img/user.png" width="56" height="56">
+		
+		</div>
+	</div>
 </body>
 </html>
-<?php
 
-?>
 

@@ -12,13 +12,14 @@ function cadastraProduto($produto, $caminho_imagem)
     try {
         // insere os dados na tabela produto
         $comando = $conexao->prepare('INSERT INTO PRODUTO(DESPROD, NOMPROD, VALPROD,
-         ESTPROD, IMGPROD) VALUES(?,?,?,?,?)');
+         ESTPROD, IMGPROD, CATPROD) VALUES(?,?,?,?,?,?)');
         
         $comando->execute([
             $produto['descricao'],
             $produto['nome'],
             $produto['preco'],
             $produto['estoque'],
+            $produto['categoria'],
             $caminho_imagem
         ]);
         return true;
@@ -49,17 +50,70 @@ function lista()
         return null;
     }
 }
+function contTodos()
+{
+    global $conexao;
+    
+    try {
+        $comando = $conexao->prepare("select * from produto"); // ordenação por padrão é ascendente
+        $comando->execute();
+        
+        $retorno = $comando->rowCount();
+        return $retorno;
+    } catch (PDOException $e) {
+        return null;
+    }
+}
+function contCategoria($categoria)
+{
+    global $conexao;
+    
+    try {
+        $comando = $conexao->prepare("select * from produto where catprod = ?"); // ordenação por padrão é ascendente
+        $comando->execute([
+            $categoria
+        ]);
+        
+        $retorno = $comando->rowCount();
+        return $retorno;
+    } catch (PDOException $e) {
+        return null;
+    }
+}
+function listaCategoria($categoria)
+{
+    global $conexao;
+    
+    try {
+        $comando = $conexao->prepare("select * from produto where catprod = ? order by codprod"); // ordenação por padrão é ascendente
+        $comando->execute([$categoria]);
+        // verificamos se foram retornados registros
+        if ($comando->rowCount() > 0) {
+            $i = 0;
+            // descarrega um registro por vez
+            while ($reg = $comando->fetch(PDO::FETCH_ASSOC)) {
+                // registro é armazenado no vetor categoria
+                $produto[$i ++] = $reg;
+
+            }
+            return $produto;
+        }
+    } catch (PDOException $e) {
+        return null;
+    }
+}
 
 function atualiza($codigo, $produto)
 {
     global $conexao;
     try {
-        $comando = $conexao->prepare("update produto set nomprod = ?, desprod = ?, valprod = ?, estprod = ? where codprod = ?");
+        $comando = $conexao->prepare("update produto set nomprod = ?, desprod = ?, valprod = ?, estprod = ?, catprod=? where codprod = ?");
         $comando->execute([
             $produto['nome'],
             $produto['descricao'],
             $produto['preco'],
             $produto['estoque'],
+            $produto['categoria'],
             $codigo
         ]);
         return true;

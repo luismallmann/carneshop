@@ -52,11 +52,12 @@ function fecharAlteracao(){
 <body>
 	<div class="container">
 		<div class="box">
-		<?php 
-			$codigo = $_GET['codprod'];
-			$produto=buscaProduto($codigo);
-			?>
-			<br><br>
+		<?php
+$codigo = $_GET['codprod'];
+$produto = buscaProduto($codigo);
+?>
+			<br>
+			<br>
 			<h3>Atualizar Produto</h3>
 			<form action="" method="post" name="frmAlteraProduto"
 				enctype="multipart/form-data">
@@ -64,7 +65,8 @@ function fecharAlteracao(){
 					<div class="col">
 						<label for="inputname">Nome do Produto</label> <input type="text"
 							name="nome" class="form-control" placeholder="Nome"
-							required="required" maxlength="40" value="<?php echo $produto['nomprod']?>">
+							required="required" maxlength="40"
+							value="<?php echo $produto['nomprod']?>">
 					</div>
 				</div>
 				<br>
@@ -72,12 +74,14 @@ function fecharAlteracao(){
 					<div class="col">
 						<label for="inputname">Estoque (Em kg)</label> <input
 							type="number" name="estoque" class="form-control"
-							placeholder="Estoque" required="required" min="0" value="<?php echo $produto['estprod']?>">
+							placeholder="Estoque" required="required" min="0"
+							value="<?php echo $produto['estprod']?>">
 					</div>
 					<div class="col">
 						<label for="inputpreço">Preço por Kg (R$)</label> <input
 							type="text" name="preco" class="form-control" placeholder="Preço"
-							required="required" min="0" id="moeda" value="<?php echo $produto['valprod']?>">
+							required="required" min="0" id="moeda"
+							value="<?php echo $produto['valprod']?>">
 					</div>
 				</div>
 				<br>
@@ -88,9 +92,20 @@ function fecharAlteracao(){
 							maxlength="140" value="<?php echo $produto['desprod']?>">
 					</div>
 				</div>
+				<div class="form-group">
+					<label for="inserirCat">Categoria</label> <select name="categoria"
+						required="required" class="form-control">
+						<option selected><?php echo $produto['catprod']?></option>
+						<option>Bovina</option>
+						<option>Suina</option>
+						<option>Frango</option>
+						<option>Outros</option>
+					</select>
+				</div>
 				<br>
-							<button name='cancelar' class='btn btn-outline-danger btn-lg'
-							type='submit' onclick="closeJanela();">Cancelar</button></a>				
+				<button name='cancelar' class='btn btn-outline-danger btn-lg'
+					type='submit' onclick="closeJanela();">Cancelar</button>
+				</a>
 				<button type="submit" name="alterar" class="btn btn-primary btn-lg">Alterar</button>
 			</form>
 		</div>
@@ -98,9 +113,9 @@ function fecharAlteracao(){
 </body>
 </html>
 <?php
-if (isset($_POST) && isset($_POST['nome']) && isset($_POST['estoque']) && isset($_POST['preco']) &&isset($_POST['alterar'])) {
+if (isset($_POST) && isset($_POST['nome']) && isset($_POST['estoque']) && isset($_POST['preco']) && isset($_POST['alterar']) && isset($_POST['categoria'])) {
 
-    if(atualiza($codigo,$_POST)==true){
+    if (atualiza($codigo, $_POST) == true) {
         echo "<script>fecharAlteracao();</script>";
     }
 }

@@ -70,6 +70,7 @@ CREATE TABLE produto (
   valprod numeric(10, 2) NOT NULL, 
   estprod int4 NOT NULL, 
   imgprod varchar(80), 
+  catprod varchar(50), 
   PRIMARY KEY (codprod));
 COMMENT ON TABLE produto IS 'informacoes do produto';
 COMMENT ON COLUMN produto.codprod IS 'codigo do produto gerado de forma sequencial';
@@ -78,6 +79,7 @@ COMMENT ON COLUMN produto.nomprod IS 'nome do produto';
 COMMENT ON COLUMN produto.valprod IS 'valor do produto(R$)';
 COMMENT ON COLUMN produto.estprod IS 'quantidade em estoque do produto';
 COMMENT ON COLUMN produto.imgprod IS 'nome de imagem cadastrada na pasta imgproduto';
+COMMENT ON COLUMN produto.catprod IS 'categoria ao qual o produto se enquadra. ex: bovina, frango, suino...';
 CREATE TABLE telefone_cliente (
   codtelclnt     SERIAL NOT NULL, 
   dddtelclnt     numeric(2, 0) NOT NULL, 

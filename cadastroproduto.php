@@ -82,6 +82,15 @@ require_once 'btsinclude.html';
 							maxlength="140">
 					</div>
 				</div>
+				<div class="form-group">
+					<label for="inserirCat">Categoria</label> <select name="categoria"
+						required="required" class="form-control">
+						<option selected>Bovina</option>
+						<option>Suina</option>
+						<option>Frango</option>
+						<option>Outros</option>
+					</select>
+				</div>
 				<br>
 				<button type="submit" class="btn btn-primary">Cadastrar</button>
 			</form>
@@ -124,7 +133,7 @@ if (! empty($_FILES['imagem'])) {
     }
 }
 
-if (isset($_POST) && isset($_POST['nome']) && isset($_POST['estoque']) && isset($_POST['preco'])) {
+if (isset($_POST) && isset($_POST['nome']) && isset($_POST['estoque']) && isset($_POST['preco']) && isset($_POST['categoria'])) {
     cadastraProduto($_POST, $nome_imagem);
     echo $nome_imagem;
 }
