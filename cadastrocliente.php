@@ -117,7 +117,65 @@ function TestaCPF(strCPF) {
 							TestaCPF(campo.value);
 						});
 						
-						
+ 
+    function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('cidade').value=("");
+            document.getElementById('uf').value=("");
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('cidade').value=(conteudo.localidade);
+            document.getElementById('uf').value=(conteudo.uf);
+		} //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('cidade').value="...";
+                document.getElementById('uf').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    };						
 					</script>
 				</div>
 				
@@ -173,24 +231,26 @@ function TestaCPF(strCPF) {
 				</div>
 			</div>
 			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label for="inserirCEP">CEP*</label> <input type="text" name="CEP"
+						required="required" class="form-control" maxlength="9"
+						OnKeyPress="formatar('#####-##', this)"
+						 onblur="pesquisacep(this.value);">
+				</div>
 				<div class="form-group col-md-6">
-					<label for="inserirCidade">Cidade*</label> <input type="text"
+					<label for="inserirCidade">Cidade*</label> <input type="text" id="cidade"
 						name="cidade" required="required" class="form-control"
 						maxlength="30">
 				</div>
 				<div class="form-group col-md-2">
-					<label for="inserirUF">Estado*</label> <select name="estado"
+					<label for="inserirUF">Estado*</label> <select name="estado" id="uf"
 						required="required" class="form-control">
 						<option selected>SC</option>
 						<option>PR</option>
 						<option>RS</option>
 					</select>
 				</div>
-				<div class="form-group col-md-4">
-					<label for="inserirCEP">CEP*</label> <input type="text" name="CEP"
-						required="required" class="form-control" maxlength="9"
-						OnKeyPress="formatar('#####-##', this)">
-				</div>
+				
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-5">
