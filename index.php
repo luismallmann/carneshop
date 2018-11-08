@@ -146,6 +146,11 @@ include_once "exibeprodutos.php";
 					style="background-color: #f6d18a;" tab" aria-controls="outros">Outros
 					<span class="badge badge-danger badge-pill"><?php $categoria = "Outros"; contaCategoria($categoria);?></span>
 				</a>
+				<a class="list-group-item list-group-item-action" style="background-color: #8f5227;"
+					id="list-sobre-list" data-toggle="list" href="#list-sobre"
+				"tab" aria-controls="sobre"><font
+					color="white" size="4"><b>Sobre</b></font>
+				</a>
 			</div>
 		</div>
 
@@ -192,6 +197,8 @@ if ($logado == true) {
 					aria-labelledby="list-frango-list"><?php $categoria = "Frango"; porCategoria($categoria)?></div>
 				<div class="tab-pane fade" id="list-outros" role="tabpanel"
 					aria-labelledby="list-outros-list"><?php $categoria = "Outros"; porCategoria($categoria)?></div>
+				<div class="tab-pane fade" id="list-sobre" role="tabpanel"
+					aria-labelledby="list-sobre-list"><?php $categoria = "Sobre"; require_once 'sobre.html';?></div>
 
 
 			</div>
