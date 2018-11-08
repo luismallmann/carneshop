@@ -5,34 +5,32 @@ if (isset($_POST) && isset($_POST["login"])) {
     // podemos utilizar a função header + location
     $login = $_POST["login"];
     $senha = $_POST["senha"];
-    
+
     echo $qntdped;
     if (validaLogin($login, $senha)) {
         // iniciando uma sessão
         session_start();
         // grava um usuário na sessão
         $_SESSION["login"] = $_POST["login"];
-        
+
         $codprod = $_GET["codprod"];
         $qntdped = $_GET["qntdped"];
         // grava produto do pedido no banco
-        
+
         require_once 'dao/pedidodao.php';
         $cpfclnt = buscaCPF($login);
-        
+
         $codped = cadastraPedidoNovo($cpfclnt);
-        
+
         if ($codped != null) {
             $_SESSION["codped"] = $codped;
-            if(cadastraPedido($codprod, $codped, $qntdped) == true){
-             header("Location: carrinho.php");
-            }else{
+            if (cadastraPedido($codprod, $codped, $qntdped) == true) {
+                header("Location: carrinho.php");
+            } else {
                 echo "<script> alert('Quantidade superior ao estoque disponível')</script>";
             }
-        }
-        
-      
-        else{
+        } 
+        else {
             echo "erro ao cadastrar";
         }
     } else
@@ -54,8 +52,8 @@ require_once 'btsinclude.html';
 	style="background-color: #8f5227";>
 	<div class="row">
 		<div class="col">
-			<a href="index.php"> <img
-				src="img/logo.png" alt="CarneShop" title="CarneShop">
+			<a href="index.php"> <img src="img/logo.png" alt="CarneShop"
+				title="CarneShop">
 			</a>
 		</div>
 		<div class="col-md-auto"></div>

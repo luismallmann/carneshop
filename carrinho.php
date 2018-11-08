@@ -1,27 +1,15 @@
-<?php
-require_once 'dao/pedidodao.php';
-session_start();
-if (isset($_SESSION) && ($_SESSION["codped"])) {
-    $codped = $_SESSION["codped"];
-} else
-    header("Location: index.php");
-?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>CarneShop</title>
-<!-- chama o arquivo que contem as informacoes do boot strap -->
-<?php
-require 'btsinclude.html';
-?>
 <!--constroi o topo-->
 <div id="box-topo" class="container-1230"
 	style="background-color: #8f5227";>
 	<div class="row">
 		<div class="col">
-			<a href="index.php"> <img
-				src="img/logo.png" alt="CarneShop" title="CarneShop">
+			<a href="index.php"> <img src="img/logo.png" alt="CarneShop"
+				title="CarneShop">
 			</a>
 		</div>
 		<div class="col-md-auto"></div>
@@ -29,6 +17,17 @@ require 'btsinclude.html';
 			<img src="img/carne.png" alt="CarneShop" title="CarneShop"> </a>
 		</div>
 	</div>
+	<?php
+require_once 'dao/pedidodao.php';
+session_start();
+if (isset($_SESSION) && ($_SESSION["codped"])) {
+    $codped = $_SESSION["codped"];
+} else
+    header("Location: index.php");
+
+// chama o arquivo que contem as informacoes do boot strap
+require 'btsinclude.html';
+?>
 </div>
 
 <style>
@@ -55,26 +54,25 @@ require_once 'dao/produtodao.php';
 $venda = listaPedido_Produto($codped);
 if ($venda != null && count($venda) > 0) {
     $soma = 0.0;
-    
+
     echo "<div align='center'>";
     echo "<table style='width:100%'>";
     echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
     echo "<th td colspan='2'>Nome do Produto</th><th>Quantidade</th><th>Valor por Kg(R$)</th><th>Valor Total(R$)</th>";
-    $i=0;
-    $produtosPedido=null;
-    
+    $i = 0;
+    $produtosPedido = null;
+
     foreach ($venda as $detalhaItem) {
-    
-        
+
         // trata as informacoes do pedido
         $codprod = $detalhaItem["produtocodprod"];
         $qnt = $detalhaItem["qntped"];
-     
+
         $infoProduto = buscaProduto($codprod);
         $valorItem = 0.0;
         $valorItem = $infoProduto["valprod"] * $qnt;
         $soma += $valorItem;
-        
+
         echo "<tr>";
         echo "<tr style='text-align: center; padding: 0px 0px 0px; color: #B22222; font-size: 20px; font-family: Impact, fantasy;'>";
         echo "<td><img src='imgproduto/" . $infoProduto["imgprod"] . "'/></td>";
@@ -88,7 +86,7 @@ if ($venda != null && count($venda) > 0) {
     echo "<th td colspan='4'<p style='text-align:right;'>Total</th><th>R$ " . $soma . "</th>";
     echo "</table>";
     echo "</div>";
-    
+
     $_SESSION['valorTotal'] = $soma;
 } else {
     echo "Não existem produtos cadastrados!";

@@ -1,4 +1,24 @@
-<?php
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CarneShop</title>
+<!--constroi o topo-->
+<div id="box-topo" class="container-1230"
+	style="background-color: #8f5227";>
+	<div class="row">
+		<div class="col">
+			<a href="index.php"> <img src="img/logo.png" alt="CarneShop"
+				title="CarneShop">
+			</a>
+		</div>
+		<div class="col-md-auto"></div>
+		<div class="col">
+			<img src="img/carne.png" alt="CarneShop" title="CarneShop"> </a>
+		</div>
+	</div>
+	<?php
+require 'btsinclude.html';
 // busca informacoes no banco
 require_once 'dao/pedidodao.php';
 require_once 'dao/clientedao.php';
@@ -8,7 +28,7 @@ if (isset($_SESSION) && ($_SESSION["codped"])) {
     $codped = $_SESSION["codped"];
     $login = $_SESSION["login"];
     $valorTotal = $_SESSION['valorTotal'];
-    
+
     // busca cpf a partir do login
     $cpf = buscaCPF($login);
     // busca dados pessoais
@@ -20,7 +40,7 @@ if (isset($_SESSION) && ($_SESSION["codped"])) {
     // busca telefone e gera string a ser exibida
     $telefone = buscaTelefone($cpf);
     $telefone = "(" . $telefone['dddtelclnt'] . ") " . wordwrap($telefone['numtelclnt'], 5, '-', true);
-    
+
     // formata o cpf
     // deixa todos os cpf com 11 digitos
     $cpfFormatado = str_pad($cpf, 11, '0', STR_PAD_LEFT);
@@ -49,29 +69,6 @@ if (isset($_POST)) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>CarneShop</title>
-<!-- chama o arquivo que contem as informacoes do boot strap -->
-<?php
-require 'btsinclude.html';
-?>
-<!--constroi o topo-->
-<div id="box-topo" class="container-1230"
-	style="background-color: #8f5227";>
-	<div class="row">
-		<div class="col">
-			<a href="index.php"> <img src="img/logo.png" alt="CarneShop"
-				title="CarneShop">
-			</a>
-		</div>
-		<div class="col-md-auto"></div>
-		<div class="col">
-			<img src="img/carne.png" alt="CarneShop" title="CarneShop"> </a>
-		</div>
-	</div>
 </div>
 
 <style>

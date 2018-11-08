@@ -1,3 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CarneShop</title>
+<style type="text/css">
+.window {
+	display: none;
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #FFF;
+	padding: 0px;
+	border-radius: 0px;
+}
+
+#mascara {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 9000;
+	background-color: #000;
+	display: none;
+}
+
+.fechar {
+	display: block;
+	text-align: right;
+}
+
+}
+.barra {
+	vertical-align: center;
+}
+</style>
+<style>
+.topo {
+	width: 100%;
+	height: 300px;
+	margin-left: 0px;
+	padding-left: 0px;
+	margin-right: 0px;
+	padding-right: 0px;
+	background-color: #8f5227;
+}
+
+.contato {
+	width: 100%;
+	height: 150px;
+	text-align: center;
+	margin-left: 0px;
+	padding-left: 0px;
+	margin-right: 0px;
+	padding-right: 0px;
+}
+
+body {
+	margin: 0;
+}
+</style>
+</head>
+<!-- chama o arquivo que contem as informacoes do boot strap -->
+
+<body>
+	<div class="topo" id="box-topo">
+		<a href="index.php"><img src="img/topo.png" alt="CarneShop"
+			title="CarneShop"></a>
+		<!-- PHP deve iniciar aqui para nao ter uma linha em branco --!>
 <?php
 session_start();
 require_once 'dao/produtodao.php';
@@ -39,74 +109,10 @@ if (isset($_POST) && isset($_POST["qntdped"])) {
         echo "<script> alert('Adicione pelo menos uma Unidade')</script>";
     }
 }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>CarneShop</title>
-<style type="text/css">
-.window {
-	display: none;
-	width: 300px;
-	height: 300px;
-	position: absolute;
-	left: 0;
-	top: 0;
-	background: #FFF;
-	padding: 0px;
-	border-radius: 0px;
-}
-#mascara {
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: 9000;
-	background-color: #000;
-	display: none;
-}
-.fechar {
-	display: block;
-	text-align: right;
-}
-}
-.barra {
-	vertical-align: center;
-}
-</style>
-<style>
-.topo {
-	width: 100%;
-	height: 300px;
-	margin-left:0px;
-	padding-left: 0px;
-	margin-right: 0px;
-	padding-right: 0px;
-	background-color: #8f5227;
-}
-.contato {
-	width: 100%;
-	height: 150px;
-	text-align: center;
-	margin-left:0px;
-	padding-left: 0px;
-	margin-right: 0px;
-	padding-right: 0px;
-}
-body {
-   margin:0;
-}
-</style>
-<!-- chama o arquivo que contem as informacoes do boot strap -->
-<?php
+
 include_once 'btsinclude.html';
 include_once "exibeprodutos.php";
 ?>
-</head>
-<body>
-	<div class="topo" id="box-topo">
-		<a href="index.php"><img src="img/topo.png" alt="CarneShop"
-			title="CarneShop"></a>
 	</div>
 	<div class="row">
 		<!-- cria menu lateral -->
@@ -142,7 +148,6 @@ include_once "exibeprodutos.php";
 				</a>
 			</div>
 		</div>
-
 
 		<div class="col-10">
 <?php
