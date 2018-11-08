@@ -25,14 +25,18 @@ require_once 'btsinclude.html';
         if ($produto != null && count($produto) > 0) {
                 
             echo "<div align='center'>";
-            echo "<table style='width:50%'>";
-            echo "<th>Código</th><th>Nome do Produto</th><th>Quantidade</th><th>Valor por Kg(R$)</th>";
+            echo "<table  class='table' style='width:50%'>";
+            echo "<thead class='thead-dark'>";
+            echo "<th scope='col'>Código</th><th scope='col'>Nome do Produto</th><th scope='col'>Quantidade</th><th scope='col'>Valor por Kg(R$)</th>";
+            echo "</thead>";
             foreach ($produto as $infoProduto) {
                 echo "<tr>";
-                echo "<td>". $infoProduto["codprod"] . "    </td>";
-                echo "<td>" . $infoProduto['nomprod'] . "</td>";
-                echo "<td>" . $infoProduto['estprod'] . "</td>";
-                echo "<td>" . $infoProduto["valprod"] . "</td>";
+                echo "<thead class=\"thead-light\">";
+                echo "<th scope='row'>". $infoProduto["codprod"] . "    </th>";
+                echo "<th scope='row'>" . $infoProduto['nomprod'] . "</th>";
+                echo "<th scope='row'>" . $infoProduto['estprod'] . "</th>";
+                echo "<th scope='row'>" . $infoProduto["valprod"] . "</th>";
+                echo "</thead>";
                 echo "</tr>";
             }
             echo "</table>";

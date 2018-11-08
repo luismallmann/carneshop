@@ -22,8 +22,10 @@ require 'btsinclude.html';
     $cliente = listaClientes();
     if ($cliente != null && count($cliente) > 0) {       
         echo "<div align='center'>";
-        echo "<table style='width:80%'>";
-        echo "<th>CPF</th><th>Nome</th><th>Email</th><th>Cidade</th>";
+        echo "<table class='table'  style='width:80%'>";
+        echo "<thead class='thead-dark'>";
+        echo "<th scope='col'>CPF</th><th scope='col'>Nome</th><th scope='col'>Email</th><th scope='col'>Cidade</th>";
+        echo "</thead>";
         foreach ($cliente as $detalhaCliente) {
             //formata o cpf para exibicao
             $cpfFormatado = str_pad($detalhaCliente['cpfclnt'], 11, '0', STR_PAD_LEFT);
@@ -33,11 +35,13 @@ require 'btsinclude.html';
             $cpfFormatado = substr_replace($cpfFormatado, ".", 7, 0);
             // hifen
             $cpfFormatado = substr_replace($cpfFormatado, "-", 11, 0);            
-            echo "<tr>";         
-            echo "<td>" . $cpfFormatado . "</td>";
-            echo "<td>" . $detalhaCliente['nomclnt'] . "</td>";
-            echo "<td>" . $detalhaCliente['emlclnt'] . "</td>";
-            echo "<td>" . $detalhaCliente['cidendclnt'] . " - " . $detalhaCliente['estendclnt']."</td>";
+            echo "<tr>";   
+            echo "<thead class='thead-light'>";
+            echo "<th scope='row'>" . $cpfFormatado . "</td>";
+            echo "<th scope='row'>" . $detalhaCliente['nomclnt'] . "</td>";
+            echo "<th scope='row'>" . $detalhaCliente['emlclnt'] . "</td>";
+            echo "<th scope='row'>" . $detalhaCliente['cidendclnt'] . " - " . $detalhaCliente['estendclnt']."</td>";
+            echo "</thead>";
             echo "</tr>";
         }
         echo "<tr style='text-align: center; padding: 0px 0px 0px;; font-size: 25px; font-family: Impact, fantasy;'>";
