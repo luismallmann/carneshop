@@ -4,6 +4,8 @@
 
 2-Criar as tabelas conforme o script disponível:
 scr_cria_tabelas.sql
+indice.sql
+views.sql
 
 3-Adicionar os registros na seguinte ordem:
 cliente.sql
