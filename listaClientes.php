@@ -11,20 +11,27 @@ if (empty($_SESSION['usuario'])){
 <meta charset="utf-8">
 <title>CarneShop - Lista de Vendas</title>
 <!-- chama o arquivo que contem as informacoes do boot strap -->
+<script lang=javascript type="text/javascript">
+function gerenciarVenda(url){
+	varWindow = window.open (url, 0, 'toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=850,height=800')
+}
+</script>
 <?php
 require 'btsinclude.html';
 ?>
+
 <!--constroi o topo-->
 </head>
 <body>	
 <h3>Clientes Cadastados</h3>
     <?php
     $cliente = listaClientes();
+    
     if ($cliente != null && count($cliente) > 0) {       
         echo "<div align='center'>";
         echo "<table class='table'  style='width:80%'>";
         echo "<thead class='thead-dark'>";
-        echo "<th scope='col'>CPF</th><th scope='col'>Nome</th><th scope='col'>Email</th><th scope='col'>Cidade</th>";
+        echo "<th scope='col'>CPF</th><th scope='col'>Nome</th><th scope='col'>Email</th><th scope='col'>Cidade</th><th scope='col'>Pedidos</th>";
         echo "</thead>";
         foreach ($cliente as $detalhaCliente) {
             //formata o cpf para exibicao
@@ -34,13 +41,18 @@ require 'btsinclude.html';
             // segundo ponto
             $cpfFormatado = substr_replace($cpfFormatado, ".", 7, 0);
             // hifen
-            $cpfFormatado = substr_replace($cpfFormatado, "-", 11, 0);            
+            $cpfFormatado = substr_replace($cpfFormatado, "-", 11, 0);       
+            $params = '?' . http_build_query(array(
+                'cpf' => $detalhaCliente['cpfclnt']));
+            
+            $url = 'pedidosCliente.php'.$params;
             echo "<tr>";   
             echo "<thead class='thead-light'>";
             echo "<th scope='row'>" . $cpfFormatado . "</td>";
             echo "<th scope='row'>" . $detalhaCliente['nomclnt'] . "</td>";
             echo "<th scope='row'>" . $detalhaCliente['emlclnt'] . "</td>";
             echo "<th scope='row'>" . $detalhaCliente['cidendclnt'] . " - " . $detalhaCliente['estendclnt']."</td>";
+            echo "<th scope='row'><input type='image' id='image' alt='mostrar' src='img/show.png' onclick=\"gerenciarVenda('$url')\"></td>";
             echo "</thead>";
             echo "</tr>";
         }

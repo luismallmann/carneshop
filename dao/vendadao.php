@@ -69,5 +69,29 @@ function alteraStatus($codvenda, $status)
         // echo $e->getMessage();
     }
 }
+function listaVendasCliente($cpf)
+{
+    global $conexao;
+    
+    try {
+        $comando = $conexao->prepare("select V.CODVENDA, V.VALVENDA, V.DATVENDA, V.HORVENDA
+        from venda V
+        inner join pedido P on P.codped = V.pedidocodped
+        where P.clientecpfclnt = ?;"); // ordenação por padrão é ascendente
+        $comando->execute(array($cpf));
+        // verificamos se foram retornados registros
+        if ($comando->rowCount() > 0) {
+            $i = 0;
+            // descarrega um registro por vez
+            while ($reg = $comando->fetch(PDO::FETCH_ASSOC)) {
+                // registro é armazenado no vetor categoria
+                $venda[$i++] = $reg;
+            }
+        }
+        return $venda;
+    } catch (PDOException $e) {
+        return null;
+    }
+}
 
 ?>
