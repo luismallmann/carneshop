@@ -1,5 +1,4 @@
 <?php
-
 require_once 'dao/produtodao.php';
 
 if (isset($_POST) && isset($_POST["produtoX"])) {
@@ -42,7 +41,7 @@ require_once 'btsinclude.html';
                 		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>" . $cat["desprod"] . "</p>";
                 		
                 		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>Preço por kg: R$ "  . $cat["valprod"] . "</p>";
-                		$url='alteraproduto.php?codprod='.$cat['codprod'];
+                		$url='alteraproduto.php?codprod='.$cat['codprod'].'?login='.$_SESSION['usuario'];
                         echo "<button class='btn btn-danger' onclick=\"gerenciarVenda('$url')\">Alterar</button>";
                         echo "</a>";
                		echo "</td>";
