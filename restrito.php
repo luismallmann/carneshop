@@ -45,6 +45,10 @@ require_once 'btsinclude.html';
 			data-toggle="pill" href="#pills-relatorios" role="tab"
 			aria-controls="pills-relatorios" aria-selected="false">Relatórios Obrigatórios</a>
 		</li>
+		<li class="nav-item"><a class="nav-link" id="pills-logs-tab"
+			data-toggle="pill" href="#pills-logs" role="tab"
+			aria-controls="pills-logs" aria-selected="false">Logs</a>
+		</li>
 		<li><a class="nav-link" href="index.php" <?php session_destroy();?>>Sair</a></li>
 	</ul>
 	<div class="tab-content" id="pills-tabContent">
@@ -67,6 +71,9 @@ require_once 'btsinclude.html';
 			aria-labelledby="pills-estoque-tab"><?php include_once "estoque.php"; ?></div>
 		<div class="tab-pane fade" id="pills-relatorios" role="tabpanel"
 			aria-labelledby="pills-relatorios-tab"><?php include_once "relatorios.php"; ?></div>
+		<div class="tab-pane fade" id="pills-logs" role="tabpanel"
+		aria-labelledby="pills-log-tab"><?php include_once "logs.php"; ?></div>
+	
 	</div>
 </body>
 </html>
