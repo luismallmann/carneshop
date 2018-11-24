@@ -1,7 +1,7 @@
 <?php
 /*
  * INSERT INTO VENDA(VALVENDA, STSVENDA,DATVENDA, HORVENDA,
- * PEDIDOCODPED) VALUES(?,?,CURRENT_DATE,CURRENT_TIME,?)
+ * PEDIDOCODPED, CODFUN) VALUES(?,?,CURRENT_DATE,CURRENT_TIME,? ,'1')
  *
  * INSERT INTO PEDIDO(CLIENTECPFCLNT) VALUES(?)
  *
@@ -77,8 +77,8 @@ for ($j = 1; $j < 600; $j ++) {
         $valorPedido += $valorTotalProduto;
     }
     $stringVenda = "(" . $valorPedido . ", 'PEDIDO RECEBIDO','
-" . $dataVenda . "','" . $hora . "','" . $codped . "')";
+" . $dataVenda . "','" . $hora . "','" . $codped . "','1')";
     echo "INSERT INTO VENDA(VALVENDA, STSVENDA,DATVENDA, HORVENDA,
-PEDIDOCODPED) VALUES " . $stringVenda . ";<br>";
+PEDIDOCODPED, LOGFUN) VALUES " . $stringVenda . ";<br>";
 }
 ?>

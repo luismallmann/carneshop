@@ -62,7 +62,7 @@ function rel1()
         <th scope='col'>Nome Produto</th>
         <th scope='col'>Valor anterior</th>
         <th scope='col'>Valor atual</th>
-        <th scope='col'>Cod. Funcionario</th>
+        <th scope='col'>Login Funcionario</th>
         <th scope='col'>Data alteração</th>
         </tr>
         </thead>";
@@ -74,7 +74,7 @@ function rel1()
             echo "<th scope='col'>" . $detalhaRegistro['nomprod'] . "</td>";
             echo "<th scope='col'>" . $detalhaRegistro['valprodalt'] . "</td>";
             echo "<th scope='col'>" . $detalhaRegistro['valprod'] . "</td>";
-            echo "<th scope='col'>" . $detalhaRegistro['codfun'] . "</td>";
+            echo "<th scope='col'>" . $detalhaRegistro['logfun'] . "</td>";
             echo "<th scope='col'>" . $detalhaRegistro['dataalt'] . "</td>";
             echo "</thead>";
             echo "</tr>";
@@ -97,7 +97,7 @@ function rel2()
         <th scope='col'>Cod. Venda</th>
         <th scope='col'>Status Anterior</th>
         <th scope='col'>Status Atual</th>
-        <th scope='col'>Cod. Funcionario</th>
+        <th scope='col'>Login Funcionario</th>
         <th scope='col'>Data alteração</th>
         </tr>
         </thead>";
@@ -108,7 +108,7 @@ function rel2()
             echo "<th scope='col'>" . $detalhaRegistro['codvenda'] . "</td>";
             echo "<th scope='col'>" . $detalhaRegistro['stsant'] . "</td>";
             echo "<th scope='col'>" . $detalhaRegistro['stsnov'] . "</td>";
-            echo "<th scope='col'>" . $detalhaRegistro['codfun'] . "</td>";
+            echo "<th scope='col'>" . $detalhaRegistro['logfun'] . "</td>";
             echo "<th scope='col'>" . $detalhaRegistro['dataalt'] . "</td>";
             echo "</thead>";
             echo "</tr>";

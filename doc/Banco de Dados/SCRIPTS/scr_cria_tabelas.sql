@@ -70,7 +70,8 @@ CREATE TABLE produto (
   valprod numeric(10, 2) NOT NULL, 
   estprod int4 NOT NULL, 
   imgprod varchar(80), 
-  catprod varchar(50), 
+  catprod varchar(50),
+  logfun varchar(140), 
   PRIMARY KEY (codprod));
 COMMENT ON TABLE produto IS 'informacoes do produto';
 COMMENT ON COLUMN produto.codprod IS 'codigo do produto gerado de forma sequencial';
@@ -80,6 +81,7 @@ COMMENT ON COLUMN produto.valprod IS 'valor do produto(R$)';
 COMMENT ON COLUMN produto.estprod IS 'quantidade em estoque do produto';
 COMMENT ON COLUMN produto.imgprod IS 'nome de imagem cadastrada na pasta imgproduto';
 COMMENT ON COLUMN produto.catprod IS 'categoria ao qual o produto se enquadra. ex: bovina, frango, suino...';
+COMMENT ON COLUMN produto.logfun IS 'login do funcionario';
 CREATE TABLE telefone_cliente (
   codtelclnt     SERIAL NOT NULL, 
   dddtelclnt     numeric(2, 0) NOT NULL, 
@@ -97,7 +99,8 @@ CREATE TABLE venda (
   valvenda     numeric(6, 2) NOT NULL 		, 
   stsvenda     varchar(140) NOT NULL 	, 
   datvenda     date NOT NULL, 
-  horvenda     time NOT NULL 	, 
+  horvenda     time NOT NULL 	,
+  logfun varchar(140), 
   PRIMARY KEY (codvenda));
 COMMENT ON TABLE venda IS 'detalhamento da venda (pedido efetuado)';
 COMMENT ON COLUMN venda.codvenda IS 'codigo da venda';
@@ -106,9 +109,27 @@ COMMENT ON COLUMN venda.valvenda IS 'valor total da venda';
 COMMENT ON COLUMN venda.stsvenda IS 'status da venda';
 COMMENT ON COLUMN venda.datvenda IS 'data venda';
 COMMENT ON COLUMN venda.horvenda IS 'horario da venda';
+COMMENT ON COLUMN produto.logfun IS 'login do funcionario';
 ALTER TABLE pedido_produto ADD CONSTRAINT FKpedido_pro231850 FOREIGN KEY (produtocodprod) REFERENCES produto (codprod);
 ALTER TABLE pedido_produto ADD CONSTRAINT FKpedido_pro330558 FOREIGN KEY (pedidocodped) REFERENCES pedido (codped);
 ALTER TABLE venda ADD CONSTRAINT FKvenda21377 FOREIGN KEY (pedidocodped) REFERENCES pedido (codped);
 ALTER TABLE pedido ADD CONSTRAINT FKpedido77747 FOREIGN KEY (clientecpfclnt) REFERENCES cliente (cpfclnt);
 ALTER TABLE telefone_cliente ADD CONSTRAINT FKtelefone_c632501 FOREIGN KEY (clientecpfclnt) REFERENCES cliente (cpfclnt);
 ALTER TABLE endereco_cliente ADD CONSTRAINT FKendereco_c624907 FOREIGN KEY (clientecpfclnt) REFERENCES cliente (cpfclnt);
+
+CREATE TABLE produto_log (
+  codprod int4 NOT NULL	, 
+  nomprod varchar(40) NOT NULL 		, 
+  valprodalt numeric(10, 2) NOT NULL,  
+  valprod numeric(10, 2) NOT NULL, 
+  logfun varchar (140),
+dataalt date not null);
+COMMENT ON TABLE produto_log IS 'historico alteracao do produto';
+
+CREATE TABLE venda_log (
+  codvenda int4 NOT NULL	, 
+  stsant varchar (140),  
+  stsnov varchar (140), 
+  logfun varchar (140),
+  dataalt date not null);
+COMMENT ON TABLE venda_log IS 'historico alteracao do status da venda';
