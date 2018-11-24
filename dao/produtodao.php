@@ -1,7 +1,11 @@
 ﻿<?php
 require_once 'db/conexao.php';
 require_once 'dao/vendadao.php';
-
+session_start();
+//se está vazio na está logado, entoa requer login
+if (empty($_SESSION['usuario'])){
+    header("Location: loginfuncionario.php");
+}
 function cadastraProduto($produto, $caminho_imagem)
 /*
  * conexao tela de cadastro do produto com o bd
@@ -22,6 +26,43 @@ function cadastraProduto($produto, $caminho_imagem)
             $produto['categoria'],
             $caminho_imagem
         ]);
+        return true;
+    } catch (PDOException $e) {
+        return $e;
+    }
+}
+
+function aumentoPreco($porcentagem)
+/*
+ * conexao tela de cadastro do produto com o bd
+ */
+{
+    global $conexao; // acessa a variável conexão
+    
+    try {
+        // executa pcd_acrescimo
+        $comando = $conexao->prepare('select pcd_acrescimo(?,?)');
+        $teste = $_SESSION['usuario'];
+        $comando->execute([
+            $porcentagem,
+            $teste]);
+        return true;
+    } catch (PDOException $e) {
+        return $e;
+    }
+}
+
+function descontoPreco($porcentagem1)
+{
+    global $conexao; // acessa a variável conexão
+    
+    try {
+        // executa pcd_desconto
+        $comando = $conexao->prepare('select pcd_desconto(?,?)');
+         $teste = $_SESSION['usuario'];
+        $comando->execute([
+            $porcentagem1 ,
+            $teste]);
         return true;
     } catch (PDOException $e) {
         return $e;
@@ -107,16 +148,18 @@ function atualiza($codigo, $produto)
 {
     global $conexao;
     try {
-        $comando = $conexao->prepare("update produto set nomprod = ?, desprod = ?, valprod = ?, estprod = ?, catprod=? where codprod = ?");
+        $login = $_SESSION['usuario'];
+        $comando = $conexao->prepare("update produto set nomprod = ?, desprod = ?, valprod = ?, estprod = ?, catprod=?,logfun =? where codprod = ?");
         $comando->execute([
             $produto['nome'],
             $produto['descricao'],
             $produto['preco'],
             $produto['estoque'],
             $produto['categoria'],
+            $login,
             $codigo
         ]);
-        return true;
+            return true;
     } catch (PDOException $e) {
         return false;
     }
@@ -202,4 +245,5 @@ function atualizaQuantidadeFinal($codvenda)
         $e->getMessage();
     }
 }
+
 ?>

@@ -41,7 +41,7 @@ require_once 'btsinclude.html';
                 		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>" . $cat["desprod"] . "</p>";
                 		
                 		echo "<p style='text-align: justify; margin: 10px; color: #696969; font-size: 22px; font-family: Times, serif;'>Preço por kg: R$ "  . $cat["valprod"] . "</p>";
-                		$url='alteraproduto.php?codprod='.$cat['codprod'].'?login='.$_SESSION['usuario'];
+                		$url='alteraproduto.php?codprod='.$cat['codprod'];
                         echo "<button class='btn btn-danger' onclick=\"gerenciarVenda('$url')\">Alterar</button>";
                         echo "</a>";
                		echo "</td>";

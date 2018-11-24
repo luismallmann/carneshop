@@ -60,9 +60,9 @@ function alteraStatus($codvenda, $status)
     try {
         
         // insere os dados na tabela endereco_cliente
-        $comando = $conexao->prepare('UPDATE VENDA SET STSVENDA = ? WHERE CODVENDA = ?;');
+        $comando = $conexao->prepare('UPDATE VENDA SET STSVENDA = ?, logfun =? WHERE CODVENDA = ?;');
         
-        $comando->execute(array($status,$codvenda));
+        $comando->execute(array($status,$_SESSION['usuario'],$codvenda));
         return true;
     } catch (PDOException $e) {
         echo $e->getMessage();
