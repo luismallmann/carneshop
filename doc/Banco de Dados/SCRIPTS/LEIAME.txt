@@ -13,3 +13,6 @@ endereco_cliente.sql
 telefone_cliente.sql
 produto.sql
 vendas.sql
+triggers
+funções_triggers
+funções
