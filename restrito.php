@@ -1,7 +1,7 @@
 <?php
 session_start();
-//se está vazio na está logado, entoa requer login
-if (empty($_SESSION['usuario'])){
+// se está vazio na está logado, entoa requer login
+if (empty($_SESSION['usuario'])) {
     header("Location: loginfuncionario.php");
 }
 ?>
@@ -43,25 +43,26 @@ require_once 'btsinclude.html';
 		</li>
 		<li class="nav-item"><a class="nav-link" id="pills-relatorios-tab"
 			data-toggle="pill" href="#pills-relatorios" role="tab"
-			aria-controls="pills-relatorios" aria-selected="false">Relatórios Obrigatórios</a>
-		</li>
+			aria-controls="pills-relatorios" aria-selected="false">Relatórios
+				Obrigatórios</a></li>
 		<li class="nav-item"><a class="nav-link" id="pills-logs-tab"
 			data-toggle="pill" href="#pills-logs" role="tab"
-			aria-controls="pills-logs" aria-selected="false">Logs</a>
-		</li>
+			aria-controls="pills-logs" aria-selected="false">Logs</a></li>
 		<li class="nav-item"><a class="nav-link" id="pills-ajustepreco-tab"
 			data-toggle="pill" href="#pills-ajustepreco" role="tab"
 			aria-controls="pills-ajustepreco" aria-selected="false">Ajuste Preço</a>
 		</li>
-		<li><a class="nav-link" href="index.php" <?php ?>>Sair</a></li>
+		<li class="nav-item"><a class="nav-link" href="index.php">Sair</a></li>
 	</ul>
 	<div class="tab-content" id="pills-tabContent">
 		<div class="tab-pane fade show active" id="pills-inicio"
 			role="tabpanel" aria-labelledby="pills-inicio-tab" align="center"
 			style="background-color: #8f5227";>
 			<img src="img/logo.png" align="middle">
-			<h1 style="color:white; font-family: inherit;"><b>Painel de Controle</b></h1>
-			
+			<h1 style="color: white; font-family: inherit;">
+				<b>Painel de Controle</b>
+			</h1>
+
 		</div>
 		<div class="tab-pane fade" id="pills-cadastroproduto" role="tabpanel"
 			aria-labelledby="pills-cadastroproduto-tab">/<?php include_once 'cadastroproduto.php'; ?>*/</div>
@@ -76,10 +77,10 @@ require_once 'btsinclude.html';
 		<div class="tab-pane fade" id="pills-relatorios" role="tabpanel"
 			aria-labelledby="pills-relatorios-tab"><?php include_once "relatorios.php"; ?></div>
 		<div class="tab-pane fade" id="pills-logs" role="tabpanel"
-		aria-labelledby="pills-log-tab"><?php include_once "logs.php"; ?></div>
+			aria-labelledby="pills-log-tab"><?php include_once "logs.php"; ?></div>
 		<div class="tab-pane fade" id="pills-ajustepreco" role="tabpanel"
-		aria-labelledby="pills-ajustepreco-tab"><?php include_once "ajustepreco.php"; ?></div>
-	
+			aria-labelledby="pills-ajustepreco-tab"><?php include_once "ajustepreco.php"; ?></div>
+		
 	</div>
 </body>
 </html>

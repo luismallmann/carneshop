@@ -7,12 +7,14 @@ scr_cria_tabelas.sql
 indice.sql
 views.sql
 
-3-Adicionar os registros na seguinte ordem:
+3-adicionar funcoes e triggers
+funcoes_triggers.sql
+triggers.sql
+funcoes.sql
+
+4-Adicionar os registros na seguinte ordem:
 cliente.sql
 endereco_cliente.sql
 telefone_cliente.sql
 produto.sql
 vendas.sql
-triggers
-funções_triggers
-funções

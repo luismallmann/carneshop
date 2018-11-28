@@ -1,11 +1,11 @@
 ﻿<?php
 require_once 'db/conexao.php';
 require_once 'dao/vendadao.php';
-session_start();
+/*session_start();
 //se está vazio na está logado, entoa requer login
 if (empty($_SESSION['usuario'])){
     header("Location: loginfuncionario.php");
-}
+}*/
 function cadastraProduto($produto, $caminho_imagem)
 /*
  * conexao tela de cadastro do produto com o bd
@@ -38,11 +38,12 @@ function aumentoPreco($porcentagem)
  */
 {
     global $conexao; // acessa a variável conexão
-    
+  
     try {
         // executa pcd_acrescimo
         $comando = $conexao->prepare('select pcd_acrescimo(?,?)');
         $teste = $_SESSION['usuario'];
+        echo $teste;
         $comando->execute([
             $porcentagem,
             $teste]);

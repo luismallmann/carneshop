@@ -1,6 +1,5 @@
 ﻿<?php
 require_once 'db/conexao.php';
-
 function cadastraVenda($valorTotal, $codped)
 {
     global $conexao; // acessa a variável conexão
@@ -24,7 +23,7 @@ function listaVendas()
     
     try {
         $comando = $conexao->prepare("select * from venda
-        order by codvenda"); // ordenação por padrão é ascendente
+        order by datvenda desc, horvenda desc"); // ordenação por padrão é ascendente
         $comando->execute();
         // verificamos se foram retornados registros
         if ($comando->rowCount() > 0) {
@@ -56,6 +55,7 @@ function buscaVenda($codvenda)
 }
 function alteraStatus($codvenda, $status)
 {
+    session_start();
     global $conexao; // acessa a variável conexão
     try {
         
