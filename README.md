@@ -1,2 +1,1 @@
-# PHPcomerce
-
+Project aims to present an e-commerce meat store. It was developed during graduation in Computer Science. The languages HTML, JavaScript, PHP and SQL were used. Artur and Nathan collaborated with the development.
